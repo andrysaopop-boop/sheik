@@ -1,0 +1,1197 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Архив скриптов | Нектар Отшельников</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-darker: #000000;
+            --text-white: #ffffff;
+            --text-gray: #aaaaaa;
+            --rgb-red: #ff0033;
+            --rgb-blue: #0066ff;
+            --rgb-green: #00ff66;
+            --rgb-purple: #9900ff;
+            --rgb-cyan: #00ffff;
+            --rgb-yellow: #ffff00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background: var(--bg-darker);
+            color: var(--text-white);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 51, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 102, 255, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(0, 255, 102, 0.02) 0%, transparent 30%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: relative;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, var(--rgb-red), var(--rgb-blue)) 1;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--rgb-red), var(--rgb-blue), var(--rgb-green), 
+                var(--rgb-purple), var(--rgb-cyan));
+            animation: rgbFlow 4s infinite linear;
+        }
+
+        @keyframes rgbFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            background: linear-gradient(45deg, var(--rgb-red), var(--rgb-blue), var(--rgb-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 102, 255, 0.5);
+            letter-spacing: 1px;
+            font-weight: 900;
+        }
+
+        .logo .subtitle {
+            color: var(--text-gray);
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin-top: -3px;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 15px;
+            border-radius: 6px;
+            margin-top: 8px;
+            font-size: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--rgb-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        nav {
+            margin-top: 15px;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .nav-item {
+            background: rgba(20, 20, 20, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+            text-decoration: none;
+            color: var(--text-white);
+            display: block;
+            font-size: 13px;
+        }
+
+        .nav-item:hover {
+            background: rgba(30, 30, 30, 0.9);
+            border: 1px solid var(--rgb-blue);
+            transform: translateY(-3px);
+        }
+
+        .nav-item.active {
+            background: rgba(30, 30, 30, 0.9);
+            border: 1px solid var(--rgb-purple);
+        }
+
+        .nav-item i {
+            color: var(--rgb-cyan);
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .main-content {
+            margin: 20px 0;
+        }
+
+        .page-header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--rgb-green);
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 102, 0.05));
+        }
+
+        .page-title {
+            font-size: 22px;
+            color: var(--text-white);
+            margin-bottom: 8px;
+        }
+
+        .page-title i {
+            color: var(--rgb-green);
+            margin-right: 8px;
+        }
+
+        /* Сетка скриптов */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 650px) {
+            .scripts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .script-card {
+            background: rgba(15, 15, 15, 0.9);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        .script-card:hover {
+            border-color: var(--rgb-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 102, 255, 0.2);
+        }
+
+        .script-header {
+            background: linear-gradient(90deg, rgba(20, 20, 20, 0.9), rgba(10, 10, 10, 0.9));
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .script-price {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, var(--rgb-purple), var(--rgb-red));
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(153, 0, 255, 0.5);
+        }
+
+        @media (max-width: 480px) {
+            .script-price {
+                position: relative;
+                top: auto;
+                right: auto;
+                display: inline-block;
+                margin-top: 8px;
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+        }
+
+        .script-title {
+            color: var(--text-white);
+            font-size: 18px;
+            margin-bottom: 8px;
+            padding-right: 80px;
+        }
+
+        @media (max-width: 480px) {
+            .script-title {
+                padding-right: 0;
+                font-size: 20px;
+            }
+        }
+
+        .script-tag {
+            background: var(--rgb-purple);
+            color: white;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        .script-meta {
+            display: flex;
+            gap: 12px;
+            color: var(--text-gray);
+            font-size: 11px;
+            flex-wrap: wrap;
+        }
+
+        .script-body {
+            padding: 20px;
+        }
+
+        .script-description {
+            color: var(--text-gray);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .features-list {
+            margin: 15px 0;
+            padding-left: 15px;
+        }
+
+        .features-list li {
+            margin-bottom: 6px;
+            color: var(--text-gray);
+            font-size: 12px;
+        }
+
+        .features-list li i {
+            color: var(--rgb-green);
+            margin-right: 6px;
+        }
+
+        .script-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .script-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .btn-download {
+            background: linear-gradient(45deg, var(--rgb-green), var(--rgb-blue));
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 102, 0.3);
+        }
+
+        /* Модальное окно оплаты - АДАПТИВНОЕ */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: rgba(10, 10, 10, 0.98);
+            border: 2px solid var(--rgb-purple);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 30px rgba(153, 0, 255, 0.3);
+            animation: modalSlide 0.3s ease-out;
+        }
+
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                max-height: 95vh;
+                border-radius: 8px;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.98);
+            z-index: 1;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            color: var(--rgb-cyan);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 480px) {
+            .modal-title {
+                font-size: 16px;
+            }
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--rgb-red);
+        }
+
+        .payment-info {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 0 20px 20px;
+            border-left: 3px solid var(--rgb-yellow);
+        }
+
+        @media (max-width: 480px) {
+            .payment-info {
+                padding: 12px;
+                margin: 0 15px 15px;
+            }
+        }
+
+        .payment-step {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .payment-step:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--rgb-purple);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 8px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .step-number {
+                width: 22px;
+                height: 22px;
+                line-height: 22px;
+                font-size: 11px;
+            }
+        }
+
+        .step-title {
+            font-size: 16px;
+            color: var(--text-white);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        @media (max-width: 480px) {
+            .step-title {
+                font-size: 15px;
+                flex-wrap: wrap;
+            }
+        }
+
+        .step-desc {
+            color: var(--text-gray);
+            font-size: 13px;
+            line-height: 1.4;
+            margin-left: 32px;
+        }
+
+        @media (max-width: 480px) {
+            .step-desc {
+                margin-left: 0;
+                margin-top: 5px;
+                font-size: 12px;
+            }
+        }
+
+        .btc-address {
+            font-family: monospace;
+            font-size: 14px;
+            color: var(--rgb-yellow);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+            word-break: break-all;
+            border: 1px dashed var(--rgb-yellow);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 480px) {
+            .btc-address {
+                font-size: 13px;
+                padding: 10px;
+                margin: 8px 0;
+            }
+        }
+
+        .btc-address:hover {
+            background: rgba(255, 255, 0, 0.1);
+            border-color: var(--rgb-green);
+        }
+
+        .copy-btn {
+            background: var(--rgb-blue);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            margin-top: 8px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        @media (max-width: 480px) {
+            .copy-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 10px;
+                margin-top: 5px;
+            }
+        }
+
+        .copy-btn:hover {
+            background: var(--rgb-cyan);
+            color: black;
+        }
+
+        .memo-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--rgb-green);
+            color: var(--text-white);
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: monospace;
+            margin-top: 8px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 480px) {
+            .memo-input {
+                padding: 10px;
+                font-size: 13px;
+            }
+        }
+
+        .memo-input:focus {
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+        }
+
+        .memo-note {
+            color: var(--rgb-red);
+            font-size: 12px;
+            margin-top: 8px;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .payment-proof {
+            margin: 20px;
+            padding: 15px;
+            background: rgba(0, 255, 102, 0.1);
+            border-radius: 6px;
+            border: 1px solid var(--rgb-green);
+        }
+
+        @media (max-width: 480px) {
+            .payment-proof {
+                margin: 15px;
+                padding: 12px;
+            }
+        }
+
+        .proof-title {
+            color: var(--rgb-green);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+
+        @media (max-width: 480px) {
+            .proof-title {
+                font-size: 14px;
+            }
+        }
+
+        .proof-list {
+            list-style: none;
+        }
+
+        .proof-list li {
+            margin-bottom: 8px;
+            padding-left: 22px;
+            position: relative;
+            color: var(--text-gray);
+            font-size: 12px;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 480px) {
+            .proof-list li {
+                font-size: 11px;
+                margin-bottom: 6px;
+            }
+        }
+
+        .proof-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--rgb-green);
+            font-weight: bold;
+        }
+
+        /* Адаптивные кнопки для модалки */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 480px) {
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .button-group .copy-btn {
+                width: 100%;
+            }
+        }
+
+        /* Футер */
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            color: var(--text-gray);
+            font-size: 11px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 480px) {
+            footer {
+                padding: 20px 0;
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>СКРИПТЫ</h1>
+                <div class="subtitle">НЕКТАР ОТШЕЛЬНИКОВ</div>
+            </div>
+            
+            <div class="status-bar">
+                <div class="status-item">
+                    <div class="pulse"></div>
+                    <span>Онлайн: <strong style="color:var(--rgb-green)">247</strong></span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-shopping-cart" style="color:var(--rgb-yellow)"></i>
+                    <span>Продажи: <strong>12</strong></span>
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-code" style="color:var(--rgb-cyan)"></i>
+                    <span>Скриптов: <strong>6</strong></span>
+                </div>
+            </div>
+            
+            <nav>
+                <div class="nav-grid">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <div>Главная</div>
+                    </a>
+                    <a href="archive.html" class="nav-item active">
+                        <i class="fas fa-code"></i>
+                        <div>Скрипты</div>
+                    </a>
+                    <a href="nectar-club.html" class="nav-item">
+                        <i class="fas fa-user-secret"></i>
+                        <div>Нектар-клуб</div>
+                    </a>
+                    <a href="payments.html" class="nav-item">
+                        <i class="fas fa-coins"></i>
+                        <div>Выплаты</div>
+                    </a>
+                    <a href="chat.html" class="nav-item">
+                        <i class="fas fa-comment-dots"></i>
+                        <div>Чат</div>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <div class="container main-content">
+        <!-- Заголовок страницы -->
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-code"></i> ПРЕМИУМ СКРИПТЫ</h1>
+            <p style="color:var(--text-gray); font-size:14px; line-height:1.4;">
+                Готовые автоматизированные системы для заработка. После оплаты — исходный код, инструкция и поддержка 30 дней.
+            </p>
+        </div>
+
+        <!-- Сетка скриптов -->
+        <div class="scripts-grid">
+            <!-- Скрипт 1 -->
+            <div class="script-card">
+                <div class="script-header">
+                    <div class="script-price">0.015 BTC</div>
+                    <div class="script-tag">ХИТ</div>
+                    <h3 class="script-title">AutoBTCBot PRO</h3>
+                    <div class="script-meta">
+                        <span><i class="fas fa-fire" style="color:var(--rgb-red);"></i> 500-800K/мес</span>
+                        <span><i class="fas fa-download"></i> 4.8K продаж</span>
+                        <span><i class="fas fa-code-branch"></i> v4.2</span>
+                    </div>
+                </div>
+                <div class="script-body">
+                    <p class="script-description">
+                        Telegram бот обменник BTC. Принимает платежи, показывает фейковые балансы, полная автоматизация 24/7.
+                    </p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Фейковые курсы обмена</li>
+                        <li><i class="fas fa-check"></i> Авто-уведомления об оплате</li>
+                        <li><i class="fas fa-check"></i> Статистика по клиентам</li>
+                        <li><i class="fas fa-check"></i> Защита от повторов</li>
+                        <li><i class="fas fa-check"></i> Webhook поддержка</li>
+                    </ul>
+                </div>
+                <div class="script-footer">
+                    <div style="color:var(--text-gray); font-size:12px;">
+                        <i class="fas fa-shield-alt"></i> Поддержка 30 дней
+                    </div>
+                    <button class="btn-download" onclick="showPaymentModal(1)">
+                        <i class="fas fa-shopping-cart"></i> КУПИТЬ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Скрипт 2 -->
+            <div class="script-card">
+                <div class="script-header">
+                    <div class="script-price">0.025 BTC</div>
+                    <div class="script-tag" style="background:var(--rgb-red);">PREMIUM</div>
+                    <h3 class="script-title">CasinoBot MASTER</h3>
+                    <div class="script-meta">
+                        <span><i class="fas fa-fire" style="color:var(--rgb-red);"></i> 1.2-1.8M/мес</span>
+                        <span><i class="fas fa-download"></i> 2.5K продаж</span>
+                        <span><i class="fas fa-code-branch"></i> v3.5</span>
+                    </div>
+                </div>
+                <div class="script-body">
+                    <p class="script-description">
+                        Telegram казино с ИИ. Определяет "горячих" игроков, увеличивает проигрыши, интеграция с 7 платежками.
+                    </p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> ИИ анализ игроков</li>
+                        <li><i class="fas fa-check"></i> 12 азартных игр</li>
+                        <li><i class="fas fa-check"></i> Реферальная система</li>
+                        <li><i class="fas fa-check"></i> Фейковые джекпоты</li>
+                        <li><i class="fas fa-check"></i> Анти-фрод защита</li>
+                    </ul>
+                </div>
+                <div class="script-footer">
+                    <div style="color:var(--text-gray); font-size:12px;">
+                        <i class="fas fa-star"></i> Топовый
+                    </div>
+                    <button class="btn-download" onclick="showPaymentModal(2)">
+                        <i class="fas fa-shopping-cart"></i> КУПИТЬ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Скрипт 3 -->
+            <div class="script-card">
+                <div class="script-header">
+                    <div class="script-price">0.008 BTC</div>
+                    <div class="script-tag" style="background:var(--rgb-green);">НОВИНКА</div>
+                    <h3 class="script-title">CryptoFarm AUTO</h3>
+                    <div class="script-meta">
+                        <span><i class="fas fa-fire" style="color:var(--rgb-red);"></i> 250-400K/мес</span>
+                        <span><i class="fas fa-download"></i> 1.9K продаж</span>
+                        <span><i class="fas fa-code-branch"></i> v2.1</span>
+                    </div>
+                </div>
+                <div class="script-body">
+                    <p class="script-description">
+                        Авто-ферма крипты с браузерной автоматизацией. 15+ пулов, авто-вывод, смена прокси, обход капчи.
+                    </p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> 15 крипто-пулов</li>
+                        <li><i class="fas fa-check"></i> Авто смена IP</li>
+                        <li><i class="fas fa-check"></i> Обход капчи</li>
+                        <li><i class="fas fa-check"></i> Мульти-аккаунт</li>
+                        <li><i class="fas fa-check"></i> Статистика</li>
+                    </ul>
+                </div>
+                <div class="script-footer">
+                    <div style="color:var(--text-gray); font-size:12px;">
+                        <i class="fas fa-bolt"></i> Быстрый старт
+                    </div>
+                    <button class="btn-download" onclick="showPaymentModal(3)">
+                        <i class="fas fa-shopping-cart"></i> КУПИТЬ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Скрипт 4 -->
+            <div class="script-card">
+                <div class="script-header">
+                    <div class="script-price">0.012 BTC</div>
+                    <div class="script-tag">ПОПУЛЯРНЫЙ</div>
+                    <h3 class="script-title">InvestScam PRO</h3>
+                    <div class="script-meta">
+                        <span><i class="fas fa-fire" style="color:var(--rgb-red);"></i> 300-500K/мес</span>
+                        <span><i class="fas fa-download"></i> 3.4K продаж</span>
+                        <span><i class="fas fa-code-branch"></i> v1.8</span>
+                    </div>
+                </div>
+                <div class="script-body">
+                    <p class="script-description">
+                        Инвест-платформа с фейковыми графиками. Авто-выплаты первым для иллюзии честности.
+                    </p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Фейковые графики</li>
+                        <li><i class="fas fa-check"></i> Реферальные выплаты</li>
+                        <li><i class="fas fa-check"></i> Авто-выплаты</li>
+                        <li><i class="fas fa-check"></i> Админ-панель</li>
+                        <li><i class="fas fa-check"></i> ЮMoney/Qiwi/BTC</li>
+                    </ul>
+                </div>
+                <div class="script-footer">
+                    <div style="color:var(--text-gray); font-size:12px;">
+                        <i class="fas fa-chart-line"></i> Стабильный
+                    </div>
+                    <button class="btn-download" onclick="showPaymentModal(4)">
+                        <i class="fas fa-shopping-cart"></i> КУПИТЬ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Скрипт 5 -->
+            <div class="script-card">
+                <div class="script-header">
+                    <div class="script-price">0.018 BTC</div>
+                    <div class="script-tag">ВСЕ В 1</div>
+                    <h3 class="script-title">DarkSuite BUNDLE</h3>
+                    <div class="script-meta">
+                        <span><i class="fas fa-fire" style="color:var(--rgb-red);"></i> 700K-1M/мес</span>
+                        <span><i class="fas fa-download"></i> 1.2K продаж</span>
+                        <span><i class="fas fa-code-branch"></i> v5.0</span>
+                    </div>
+                </div>
+                <div class="script-body">
+                    <p class="script-description">
+                        5 скриптов в одном: BTC обменник, Казино, Ферма, Инвест-платформа и Арбитражный бот.
+                    </p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> 5 скриптов в пакете</li>
+                        <li><i class="fas fa-check"></i> Единая админка</li>
+                        <li><i class="fas fa-check"></i> Общая база</li>
+                        <li><i class="fas fa-check"></i> Кросс-продажи</li>
+                        <li><i class="fas fa-check"></i> Пожизненно</li>
+                    </ul>
+                </div>
+                <div class="script-footer">
+                    <div style="color:var(--text-gray); font-size:12px;">
+                        <i class="fas fa-crown"></i> Максимум
+                    </div>
+                    <button class="btn-download" onclick="showPaymentModal(5)">
+                        <i class="fas fa-shopping-cart"></i> КУПИТЬ
+                    </button>
+                </div>
+            </div>
+
+            <!-- Скрипт 6 -->
+            <div class="script-card">
+                <div class="script-header">
+                    <div class="script-price">0.006 BTC</div>
+                    <div class="script-tag" style="background:var(--rgb-blue);">СТАРТ</div>
+                    <h3 class="script-title">MiniScam STARTER</h3>
+                    <div class="script-meta">
+                        <span><i class="fas fa-fire" style="color:var(--rgb-red);"></i> 100-200K/мес</span>
+                        <span><i class="fas fa-download"></i> 5.1K продаж</span>
+                        <span><i class="fas fa-code-branch"></i> v1.2</span>
+                    </div>
+                </div>
+                <div class="script-body">
+                    <p class="script-description">
+                        Упрощенный скрипт для новичков. Мини-обменник с базовым функционалом. Установка за 15 минут.
+                    </p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Простая установка</li>
+                        <li><i class="fas fa-check"></i> Базовая защита</li>
+                        <li><i class="fas fa-check"></i> ЮMoney/Qiwi</li>
+                        <li><i class="fas fa-check"></i> Инструкция</li>
+                        <li><i class="fas fa-check"></i> Поддержка в TG</li>
+                    </ul>
+                </div>
+                <div class="script-footer">
+                    <div style="color:var(--text-gray); font-size:12px;">
+                        <i class="fas fa-graduation-cap"></i> Для новичков
+                    </div>
+                    <button class="btn-download" onclick="showPaymentModal(6)">
+                        <i class="fas fa-shopping-cart"></i> КУПИТЬ
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно оплаты - АДАПТИВНОЕ -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-bitcoin"></i> ОПЛАТА СКРИПТА</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <div class="payment-info">
+                <div class="payment-step">
+                    <div class="step-title">
+                        <span class="step-number">1</span> Выбранный скрипт
+                    </div>
+                    <div class="step-desc" id="selectedScript">AutoBTCBot PRO - 0.015 BTC</div>
+                </div>
+                
+                <div class="payment-step">
+                    <div class="step-title">
+                        <span class="step-number">2</span> Отправьте Bitcoin
+                    </div>
+                    <div class="step-desc">
+                        Отправьте точную сумму на адрес ниже. Ждите 1 подтверждение в сети.
+                    </div>
+                    
+                    <div class="btc-address" id="btcAddress" onclick="copyAddress()">
+                        bc1qml2cuesqw378hdc7umzh85vg0qv7jjvvlsjph0
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="copy-btn" onclick="copyAddress()">
+                            <i class="fas fa-copy"></i> Копировать адрес
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="payment-step">
+                    <div class="step-title">
+                        <span class="step-number">3</span> Укажите MEMO
+                    </div>
+                    <div class="step-desc">
+                        В поле "Message/Memo" при переводе укажите этот код:
+                    </div>
+                    
+                    <input type="text" class="memo-input" id="memoInput" value="NCT" readonly>
+                    
+                    <div class="button-group">
+                        <button class="copy-btn" onclick="copyMemo()">
+                            <i class="fas fa-copy"></i> Копировать MEMO
+                        </button>
+                    </div>
+                    
+                    <div class="memo-note">
+                        ⚠️ Без MEMO платеж не будет идентифицирован!
+                    </div>
+                </div>
+            </div>
+            
+            <div class="payment-proof">
+                <div class="proof-title">
+                    <i class="fas fa-shield-alt"></i> Гарантии
+                </div>
+                <ul class="proof-list">
+                    <li>После 1 подтверждения — архив со скриптом</li>
+                    <li>Доставка на email автоматически</li>
+                    <li>Поддержка 30 дней после покупки</li>
+                    <li>Обновления в течение года бесплатно</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <p>© 2023 Нектар Отшельников. Все скрипты "как есть". Для обучения.</p>
+            <p style="margin-top:8px; color:var(--rgb-blue); font-size:10px;">
+                <i class="fas fa-lock"></i> Конфиденциальность транзакций
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Данные скриптов
+        const scripts = [
+            {id: 1, name: "AutoBTCBot PRO", price: "0.015 BTC", memo: "NCT-BTCBOT-001"},
+            {id: 2, name: "CasinoBot MASTER", price: "0.025 BTC", memo: "NCT-CASINO-002"},
+            {id: 3, name: "CryptoFarm AUTO", price: "0.008 BTC", memo: "NCT-FARM-003"},
+            {id: 4, name: "InvestScam PRO", price: "0.012 BTC", memo: "NCT-INVEST-004"},
+            {id: 5, name: "DarkSuite BUNDLE", price: "0.018 BTC", memo: "NCT-BUNDLE-005"},
+            {id: 6, name: "MiniScam STARTER", price: "0.006 BTC", memo: "NCT-START-006"}
+        ];
+
+        // Показать модальное окно оплаты
+        function showPaymentModal(scriptId) {
+            const script = scripts[scriptId - 1];
+            // Генерируем случайный MEMO
+            const randomSuffix = Math.random().toString(36).substr(2, 6).toUpperCase();
+            script.memo = `NCT-${scriptId}-${randomSuffix}`;
+            
+            document.getElementById('selectedScript').textContent = `${script.name} - ${script.price}`;
+            document.getElementById('memoInput').value = script.memo;
+            
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Блокируем прокрутку фона
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+        }
+
+        // Закрыть модальное окно
+        function closeModal() {
+            const modal = document.getElementById('paymentModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.body.style.position = 'static';
+        }
+
+        // Копировать BTC адрес
+        function copyAddress() {
+            const address = "bc1qml2cuesqw378hdc7umzh85vg0qv7jjvvlsjph0";
+            navigator.clipboard.writeText(address).then(() => {
+                showNotification('BTC адрес скопирован');
+            });
+        }
+
+        // Копировать MEMO
+        function copyMemo() {
+            const memoInput = document.getElementById('memoInput');
+            memoInput.select();
+            navigator.clipboard.writeText(memoInput.value).then(() => {
+                showNotification('MEMO скопирован');
+            });
+        }
+
+        // Уведомление
+        function showNotification(message) {
+            // Создаем уведомление
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--rgb-green);
+                color: black;
+                padding: 12px 20px;
+                border-radius: 5px;
+                z-index: 1001;
+                font-weight: bold;
+                animation: slideIn 0.3s ease-out;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                max-width: 300px;
+                text-align: center;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        // Анимации для уведомлений
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Закрыть модальное окно при клике вне его
+        document.getElementById('paymentModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+
+        // Закрыть по Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // RGB эффект для цен
+        const priceElements = document.querySelectorAll('.script-price');
+        setInterval(() => {
+            priceElements.forEach(price => {
+                if (Math.random() > 0.8) {
+                    const colors = ['var(--rgb-purple)', 'var(--rgb-red)', 'var(--rgb-yellow)'];
+                    const originalColor = price.style.background;
+                    price.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    
+                    setTimeout(() => {
+                        price.style.background = originalColor;
+                    }, 500);
+                }
+            });
+        }, 3000);
+    </script>
+</body>
+</html>
