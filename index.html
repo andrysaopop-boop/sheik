@@ -2,650 +2,392 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>ДИМЫ | Великие создатели AI-треков</title>
-    <!-- Google Fonts & Smooth -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (free) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Остров Эпштейна | Древний мир Майнкрафт</title>
+    <!-- Древние, грубые шрифты + антик -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=MedievalSharp&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* легкий эффект, но кнопка всё равно убегает */
         }
 
         body {
-            background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050b);
-            min-height: 100vh;
-            font-family: 'Space Grotesk', 'Inter', sans-serif;
-            color: #f0f3ff;
-            overflow-x: hidden;
-            position: relative;
-            cursor: default;
+            background: #1b1712;
+            background-image: repeating-linear-gradient(45deg, rgba(70, 50, 35, 0.1) 0px, rgba(70, 50, 35, 0.1) 2px, transparent 2px, transparent 8px),
+                              radial-gradient(circle at 20% 30%, #2c241c 0%, #0f0d09 100%);
+            color: #ece3d7;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            scroll-behavior: smooth;
         }
 
-        /* Анимированные частицы/звезды */
-        .stars {
+        /* Папирус/каменный скролл */
+        .scroll-mark {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" opacity="0.03"><path fill="none" d="M0,0 L400,0 L400,800 L0,800 Z" stroke="none"/><path d="M50,30 L350,30 L350,770 L50,770 Z" stroke="%23aa8866" stroke-width="1.5" fill="none"/><path d="M70,50 L330,50 L330,750 L70,750 Z" stroke="%23997755" stroke-width="0.5" fill="none"/><circle cx="200" cy="400" r="40" stroke="%23886644" stroke-width="1" fill="none"/></svg>') repeat;
+            pointer-events: none;
             z-index: 0;
         }
-        .star {
-            position: absolute;
-            background: rgba(255,255,240,0.7);
-            border-radius: 50%;
-            animation: twinkle 3s infinite alternate;
-            box-shadow: 0 0 6px rgba(255,220,150,0.6);
-        }
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(1);}
-            100% { opacity: 1; transform: scale(1.2);}
-        }
 
-        /* основной контейнер */
         .container {
-            position: relative;
-            z-index: 10;
             max-width: 1300px;
             margin: 0 auto;
-            padding: 2rem 2rem 5rem;
+            padding: 2rem 2rem 4rem;
+            position: relative;
+            z-index: 2;
         }
 
-        /* хедер с логотипом */
-        .hero {
+        /* Древний заголовок */
+        .ancient-header {
             text-align: center;
-            margin-bottom: 4rem;
-            padding-top: 1rem;
+            margin-bottom: 3rem;
+            border-bottom: 3px solid #c9aa6f;
+            border-image: repeating-linear-gradient(90deg, #c9aa6f, #7a5a3a, #c9aa6f) 1;
+            padding-bottom: 2rem;
+            position: relative;
         }
-        .badge {
+
+        .ancient-header h1 {
+            font-family: 'Cinzel', 'MedievalSharp', serif;
+            font-size: 4rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #f3deba, #c9aa6f, #8b6b3e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 4px 4px 12px rgba(0,0,0,0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .ancient-header .sub {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #cdba8c;
+            font-family: 'MedievalSharp', cursive;
+            letter-spacing: 2px;
+        }
+
+        .runes {
+            font-size: 1.8rem;
+            opacity: 0.7;
+            letter-spacing: 10px;
+        }
+
+        /* карточки древние */
+        .stone-card {
+            background: rgba(20, 16, 12, 0.75);
+            backdrop-filter: blur(3px);
+            border: 1px solid #7c684a;
+            border-radius: 32px 16px 32px 12px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,200,0.1);
+            padding: 1.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .stone-card:hover {
+            border-color: #c9aa6f;
+            box-shadow: 0 25px 40px -14px black;
+            background: rgba(28, 22, 18, 0.85);
+        }
+
+        .card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            border-left: 8px solid #dbb46a;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            color: #f7e5c2;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-title i {
+            color: #dbb46a;
+            font-size: 1.6rem;
+        }
+
+        .law-text {
+            font-size: 1rem;
+            color: #e0d3bd;
+        }
+
+        .tax-badge {
+            background: #2a241c;
             display: inline-block;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(8px);
-            padding: 0.5rem 1.2rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            font-weight: 500;
-            margin-bottom: 1.8rem;
-            border: 1px solid rgba(255,215,150,0.3);
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            border: 1px solid #aa7e54;
             color: #ffdfa5;
         }
-        h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #FFFFFF, #C0B7FF, #9F7AEA);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 20px rgba(159,122,234,0.3);
-            letter-spacing: -0.02em;
-        }
-        .glow-text {
-            font-size: 1.3rem;
-            color: #b9c7ff;
-            max-width: 600px;
-            margin: 1rem auto 0;
-            opacity: 0.9;
-        }
 
-        /* карточки создателей */
-        .creators {
+        .mine-grid {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 3rem;
-            margin: 4rem 0 5rem;
-        }
-        .card {
-            background: rgba(15, 20, 35, 0.65);
-            backdrop-filter: blur(12px);
-            border-radius: 2.5rem;
-            padding: 2rem 2rem 2.2rem;
-            width: 280px;
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255,255,200,0.2);
-            box-shadow: 0 20px 35px -15px rgba(0,0,0,0.5);
-        }
-        .card:hover {
-            transform: translateY(-12px);
-            border-color: rgba(210, 180, 255, 0.6);
-            box-shadow: 0 30px 40px -12px rgba(0,0,0,0.6);
-            background: rgba(20, 28, 48, 0.8);
-        }
-        .avatar {
-            width: 130px;
-            height: 130px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(145deg, #232b46, #101624);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            font-weight: bold;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
-            border: 2px solid rgba(200,180,255,0.5);
-        }
-        .card h2 {
-            font-size: 1.9rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(120deg, #fff, #d9cdff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .card p {
-            margin-top: 0.8rem;
-            font-size: 1rem;
-            color: #b7c3f0;
-            font-weight: 400;
-        }
-        .ai-tag {
-            margin-top: 1rem;
-            display: inline-block;
-            background: rgba(100,80,200,0.3);
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            backdrop-filter: blur(4px);
+            gap: 2rem;
+            margin: 2rem 0;
         }
 
-        /* галерея треков (визуал) */
-        .tracks-section {
-            margin: 4rem 0 5rem;
-            text-align: center;
+        .mine-card {
+            flex: 1;
+            min-width: 260px;
+            background: #1e1914e0;
+            border-radius: 28px;
+            padding: 1.6rem;
+            border-top: 3px solid #c9aa6f;
+            transition: transform 0.2s;
         }
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+
+        .mine-card.danger {
+            border-top-color: #b5432e;
+            box-shadow: 0 0 12px rgba(180, 60, 30, 0.3);
         }
-        .section-title i {
+
+        .mine-card.safe {
+            border-top-color: #5f8b5c;
+        }
+
+        .mine-title {
             font-size: 1.8rem;
-            color: #c084fc;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-family: 'Cinzel', monospace;
         }
-        .track-grid {
+
+        .rule-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .rule-list li {
+            margin-bottom: 0.7rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .rule-list li:before {
+            content: "⛏️";
+            position: absolute;
+            left: 0;
+            color: #dbb46a;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, #4a3a28, #c9aa6f, #4a3a28);
+            margin: 2rem 0;
+        }
+
+        .profession-row {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 1.8rem;
+            gap: 1rem;
+            margin-top: 1rem;
         }
-        .track-item {
-            background: rgba(0,0,0,0.45);
-            backdrop-filter: blur(8px);
-            padding: 1rem 1.8rem;
+        .prof-card {
+            background: #1f1913;
             border-radius: 60px;
+            padding: 0.5rem 1.2rem;
             font-weight: 600;
-            display: flex;
+            border: 1px solid #aa8866;
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1.1rem;
-            border: 1px solid rgba(210,180,255,0.3);
-            transition: 0.2s;
-        }
-        .track-item i {
-            font-size: 1.5rem;
-            color: #f0b27a;
-        }
-        .track-item:hover {
-            background: rgba(100,70,200,0.5);
-            border-color: #bfaaff;
-            transform: scale(1.02);
+            gap: 10px;
         }
 
-        /* БОКС С УБЕГАЮЩЕЙ КНОПКОЙ */
-        .donate-box {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(20px);
-            border-radius: 4rem;
-            padding: 2.5rem 2rem;
-            text-align: center;
-            margin: 2rem auto;
-            max-width: 700px;
-            border: 1px solid rgba(255,215,0,0.3);
-            box-shadow: 0 25px 40px rgba(0,0,0,0.4);
-            position: relative;
-        }
-        .donate-box h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-        }
-        .donate-box p {
-            color: #cdd6ff;
-            margin-bottom: 2rem;
+        .beacon-note {
+            background: #2f281f;
+            border-radius: 28px;
+            padding: 1.2rem;
+            margin: 1.8rem 0;
+            border-left: 12px solid #f3bc6c;
         }
 
-        /* КНОПКА - главный беглец */
-        .escape-btn {
-            display: inline-block;
-            background: linear-gradient(95deg, #f7971e, #ffd200);
-            border: none;
-            padding: 1rem 2.5rem;
-            font-size: 1.6rem;
-            font-weight: bold;
-            font-family: inherit;
-            border-radius: 60px;
-            color: #1e1a2f;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: all 0.05s linear;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 50;
-            border: 1px solid rgba(255,240,150,0.8);
-            white-space: nowrap;
-        }
-        .escape-btn i {
-            margin-right: 10px;
-            font-size: 1.4rem;
-        }
-        .escape-btn:active {
-            transform: scale(0.97);
-        }
-
-        /* предупреждение / юмор */
-        .warning-note {
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            background: rgba(0,0,0,0.4);
-            display: inline-block;
-            padding: 0.3rem 1.2rem;
-            border-radius: 30px;
-            color: #ffd966;
-        }
-
-        /* футер */
         footer {
-            margin-top: 5rem;
             text-align: center;
-            opacity: 0.6;
+            margin-top: 4rem;
+            padding-top: 2rem;
             font-size: 0.85rem;
+            color: #aa997a;
+            border-top: 1px dashed #6a5a42;
         }
 
-        /* адаптив */
-        @media (max-width: 700px) {
-            h1 { font-size: 2.5rem; }
-            .container { padding: 1rem; }
-            .escape-btn { font-size: 1.2rem; padding: 0.8rem 1.8rem; white-space: nowrap; }
-            .donate-box h3 { font-size: 1.5rem; }
-            .track-item { font-size: 0.9rem; padding: 0.5rem 1.2rem; }
-        }
-        @media (max-width: 480px) {
-            .escape-btn { font-size: 1rem; padding: 0.7rem 1.2rem; }
-            .donate-box { padding: 1.5rem; }
+        @media (max-width: 800px) {
+            .container {
+                padding: 1rem;
+            }
+            .ancient-header h1 {
+                font-size: 2.3rem;
+            }
+            .mine-grid {
+                flex-direction: column;
+            }
         }
 
-        /* искрящийся курсор для прикола (не обязательно) */
-        .glow-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,215,0,0.6), transparent);
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-            transition: 0.03s linear;
+        button, .fake-button {
+            background: none;
+            border: none;
+        }
+
+        i.fa, i.far, i.fas {
+            margin-right: 6px;
+        }
+        .highlight {
+            color: #ffd98c;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-
-<div class="stars" id="starsContainer"></div>
-<div class="glow-cursor" id="glowCursor"></div>
-
+<div class="scroll-mark"></div>
 <div class="container">
-    <div class="hero">
-        <div class="badge">
-            <i class="fas fa-microchip"></i>  AI GENERATION LEGENDS
+    <div class="ancient-header">
+        <div class="runes">⛏️ █ ▼ █ ⛏️</div>
+        <h1>Остров Эпштейна</h1>
+        <div class="sub">Каменный век • Древние законы • Шахты без границ</div>
+        <div class="runes" style="margin-top: 8px;">⚒️ 𓂀 𓃥 ⚒️</div>
+    </div>
+
+    <!-- Главный свод законов -->
+    <div class="stone-card" style="margin-bottom: 2rem;">
+        <div class="card-title">
+            <i class="fas fa-scroll"></i> 
+            <span>Каменный устав • Кодекс острова</span>
         </div>
-        <h1>ДИМА НАУМОВ <span style="font-weight:300">✦</span> ДИМА ЮРИН</h1>
-        <div class="glow-text">
-            <i class="fas fa-head-side-vr"></i>  Архитекторы нейросетевых хитов  •  Потоковые вселенные звука
+        <div class="law-text">
+            <p><strong>⛩️ Единый ресурсный налог (Казна Острова):</strong> Каждый житель отчисляет <span class="highlight">15%</span> от добычи <strong>алмазов, древесины, обломков (незерита), каменных пород</strong> в общую казну. Эти средства идут на <span class="highlight">великую общую стройку</span> — маяки, порталы, дороги и защиту земель.</p>
+            <p style="margin-top: 12px;"><strong>🏛️ Закон Панополии (Выбор профессии):</strong> Каждый игрок обязан избрать свою стезю. Профессия даёт особые привилегии и определяет вклад в развитие. Список профессий ниже. Смена ремесла — раз в 7 циклов луны (реал 7 дней).</p>
+        </div>
+        <div class="profession-row" style="margin-top: 20px;">
+            <span class="prof-card"><i class="fas fa-pickaxe"></i> Шахтёр</span>
+            <span class="prof-card"><i class="fas fa-tree"></i> Дровосек</span>
+            <span class="prof-card"><i class="fas fa-mountain"></i> Камнелом</span>
+            <span class="prof-card"><i class="fas fa-dragon"></i> Искатель обломков</span>
+            <span class="prof-card"><i class="fas fa-hammer"></i> Строитель казны</span>
+            <span class="prof-card"><i class="fas fa-compass"></i> Проводник туннелей</span>
+        </div>
+        <p class="law-text" style="margin-top: 15px; font-size: 0.9rem;"><i class="fas fa-info-circle"></i> Профессия даёт +5% к удаче в вашем ресурсе и особые ежедневные задания. Нарушители без профессии платят удвоенный налог.</p>
+    </div>
+
+    <!-- ДВЕ ШАХТЫ : ОПАСНАЯ И БЕЗОПАСНАЯ -->
+    <div class="mine-grid">
+        <!-- Опасная шахта -->
+        <div class="mine-card danger">
+            <div class="mine-title"><i class="fas fa-skull"></i> ОПАСНАЯ ШАХТА (Без налога!)</div>
+            <ul class="rule-list">
+                <li>✅ Вход <strong>бесплатный</strong> — налог 0% на все алмазы/ресурсы.</li>
+                <li>⚠️ <span class="highlight">Условие входа: 3+ игрока одновременно</span> (одиночный вход заблокирован духами).</li>
+                <li>⚔️ Разрешены PvP-сражения, можно ломать чужие вещи, вандализм, кражи.</li>
+                <li>💥 Внутри шахты нет защиты — всё дозволено, но помни: любой может забрать твои алмазы.</li>
+                <li>👁️ Карта опасной шахты показывается каждому игроку при первом заходе.</li>
+            </ul>
+            <div class="tax-badge" style="margin-top: 10px;"><i class="fas fa-gem"></i> ДОБЫЧА БЕЗ НАЛОГА | Риск: экстремальный</div>
+        </div>
+
+        <!-- Безопасная шахта -->
+        <div class="mine-card safe">
+            <div class="mine-title"><i class="fas fa-shield-alt"></i> БЕЗОПАСНАЯ ШАХТА</div>
+            <ul class="rule-list">
+                <li>🛡️ Вход <strong>бесплатный</strong>, запрещены PvP и разрушения (зона мира).</li>
+                <li>💰 Налог в казну: <span class="highlight">50% от всех ресурсов</span> (алмазы, руда, древесина, обломки, камень).</li>
+                <li>📉 Округление налога <strong>в меньшую сторону</strong> (в твою пользу).</li>
+                <li>🌿 Идеально для спокойного фарма и новичков.</li>
+                <li>📦 Собранные налоги идут на маяк и общие нужды.</li>
+            </ul>
+            <div class="tax-badge" style="margin-top: 10px;"><i class="fas fa-hand-holding-heart"></i> 50% налог | Полная безопасность</div>
         </div>
     </div>
 
-    <!-- карточки создателей -->
-    <div class="creators">
-        <div class="card">
-            <div class="avatar">
-                <span>🎧</span>
+    <!-- Налоговая казна и маяк -->
+    <div class="beacon-note">
+        <i class="fas fa-landmark" style="font-size: 1.8rem; float: right; opacity: 0.7;"></i>
+        <h3 style="font-family: 'Cinzel'; display: flex; gap: 10px;"><i class="fas fa-dungeon"></i> Сбор налогов & Маяк-Сокровищница</h3>
+        <p>Все налоги (15% обычный или 50% из безопасной шахты) автоматически собираются в <strong>Казну маяка</strong>. Маяк ускоряет сбор ресурсов и даёт эффект «Поспешность II» для быстрого бега и добычи на территории острова. Маяк также питает <strong>Портал в Нижний мир</strong>.</p>
+        <p><i class="fas fa-running"></i> <strong>Бегать к маяку не нужно!</strong> Налоги взимаются автоматически при помещении ресурсов в сундук-сборщик у маяка, либо через хранителя-тотем. <span class="highlight">Ускорение сбора на 30%</span> — бафф маяка.</p>
+    </div>
+
+    <!-- Портал в Незер и Великий Туннель -->
+    <div class="stone-card" style="margin-bottom: 1.5rem;">
+        <div class="card-title">
+            <i class="fas fa-fire"></i>
+            <span>Порталы в Нижний мир • Туннель Тысячи Шагов</span>
+        </div>
+        <div class="law-text">
+            <p><i class="fas fa-arrow-right"></i> <strong>Сбор на порталы</strong>: Часть собранного налога (15% от общей казны) идёт на постройку <strong>большого туннеля в аду</strong> для дальних путешествий.</p>
+            <p><i class="fas fa-route"></i> <strong>Золотое правило Ада:</strong> 1 шаг в Нижнем мире = <span class="highlight">4 шага в обычном мире</span>. Используйте порталы, чтобы сократить путь через океаны и горы. Остров Эпштейна строит грандиозный туннель для быстрых переходов между биомами.</p>
+            <div class="tax-badge" style="margin-top: 12px; background: #2f261c;"><i class="fas fa-gavel"></i> С каждого собранного ресурса — отчисления на Портал-Туннель (уже входят в 15% налога)</div>
+        </div>
+    </div>
+
+    <!-- Подробная роспись профессий и панополия -->
+    <div class="stone-card">
+        <div class="card-title">
+            <i class="fas fa-users"></i>
+            <span>Закон Панополии — роспись ремёсел</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+            <div style="flex:1; min-width: 200px;">
+                <h4><i class="fas fa-pickaxe"></i> Шахтёр</h4>
+                <p>Добывает алмазы и обломки. Обязан сдавать 15% налога, но получает бонус к прочности кирки.</p>
+                <h4 style="margin-top: 15px;"><i class="fas fa-tree"></i> Дровосек</h4>
+                <p>Заготовка древесины для маяков, порталов и стройки. Снижение налога до 12% за переработку дров.</p>
             </div>
-            <h2>Дима Наумов</h2>
-            <p>Мастер генеративных ритмов, со-создатель нейросетевых симфоний. Его треки покоряют Spotify и сознание.</p>
-            <div class="ai-tag"><i class="fas fa-brain"></i>  SynthMind AI</div>
-        </div>
-        <div class="card">
-            <div class="avatar">
-                <span>⚡</span>
+            <div style="flex:1; min-width: 200px;">
+                <h4><i class="fas fa-mountain"></i> Камнелом</h4>
+                <p>Добыча каменных пород, булыжника, андезита. Бонус: шанс удвоения блока.</p>
+                <h4 style="margin-top: 15px;"><i class="fas fa-dragon"></i> Искатель обломков</h4>
+                <p>Путешествует в Нижний мир, добывает древний обломок (незерит). Уменьшение износа брони в аду.</p>
             </div>
-            <h2>Дима Юрин</h2>
-            <p>Гений мелодических структур, продюсер с бесконечным потоком AI-энергии. Каждый трек — цифровой артефакт.</p>
-            <div class="ai-tag"><i class="fas fa-waveform"></i>  NeuralHarmony</div>
+            <div style="flex:1; min-width: 200px;">
+                <h4><i class="fas fa-hammer"></i> Строитель казны</h4>
+                <p>Следит за маяком, собирает налоги, улучшает хранилище. Получает 5% от собранных налогов обратно.</p>
+                <h4 style="margin-top: 15px;"><i class="fas fa-compass"></i> Проводник туннелей</h4>
+                <p>Отвечает за порталы и строительство туннеля в аду. Бесплатный проход через порталы и +20% к скорости передвижения в Нижнем мире.</p>
+            </div>
+        </div>
+        <hr>
+        <p><i class="fas fa-balance-scale"></i> <strong>Как выбрать профессию?</strong> Напишите /prof в чате сервера или обратитесь к Камню Панополии у главного маяка. Каждый игрок обязан иметь профессию, иначе налог повышается до 25% до момента выбора ремесла.</p>
+        <p class="tax-badge" style="margin-top: 12px;"><i class="fas fa-calculator"></i> Округление налогов: всегда в меньшую сторону (например, при добыче 9 алмазов налог 15% = 1.35 → 1 алмаз в казну, остальное тебе)</p>
+    </div>
+
+    <!-- Дополнительная секция про опасную шахту и карту -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 2rem 0;">
+        <div style="flex: 1; background: #1f1912a8; border-radius: 28px; padding: 1.5rem;">
+            <i class="fas fa-map" style="font-size: 2rem; color: #c2a15b;"></i>
+            <h3>🗺️ Карта опасной шахты</h3>
+            <p>Каждый игрок, впервые входящий на остров, получает свиток с координатами <strong>Опасной шахты (Х: -340, Z: 870)</strong>. Там можно сражаться, воровать и крушить блоки. Вход только в группе от 3 человек — древнее проклятие не пускает одиночек. Все найденные алмазы — полностью ваши, без налогов! Но остерегайтесь врагов.</p>
+        </div>
+        <div style="flex: 1; background: #1f1912a8; border-radius: 28px; padding: 1.5rem;">
+            <i class="fas fa-tachometer-alt"></i>
+            <h3>⚡ Ускорение маяка и налоги</h3>
+            <p>Налог 15% (общий ресурсный) собирается на маяк, дающий эффект <strong>Скорость II</strong> и <strong>Ускоренная добыча</strong> в радиусе 100 блоков. Чтобы не бегать с ресурсами по всему острову — существуют специальные сундуки-сборщики рядом с маяком, куда нужно скидывать налог раз в день. Модераторы проверяют баланс.</p>
+            <p><i class="fas fa-hand-peace"></i> Если налог не уплачен — налагается штраф 30% от инвентаря.</p>
         </div>
     </div>
 
-    <!-- Галерея треков (AI треки) -->
-    <div class="tracks-section">
-        <div class="section-title">
-            <i class="fas fa-music"></i>
-            <span>⚡ культовые AI-треки ⚡</span>
-            <i class="fas fa-robot"></i>
-        </div>
-        <div class="track-grid">
-            <div class="track-item"><i class="fas fa-cloud-moon"></i> Нейро-Рассвет</div>
-            <div class="track-item"><i class="fas fa-charging-station"></i> Импульс 404</div>
-            <div class="track-item"><i class="fas fa-dragon"></i> Цифровой Шаман</div>
-            <div class="track-item"><i class="fas fa-glasses"></i> Алгоритм Любви</div>
-            <div class="track-item"><i class="fas fa-infinity"></i> Бесконечный Бит</div>
-            <div class="track-item"><i class="fas fa-crown"></i> Код Гения</div>
-        </div>
-        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">⭐ миллиарды нейро-прослушиваний ⭐</p>
+    <!-- Цитата и железный свиток -->
+    <div style="text-align: center; margin: 2rem 0 1rem;">
+        <i class="fas fa-crown" style="font-size: 2rem; opacity: 0.5;"></i>
+        <p style="font-family: 'MedievalSharp'; font-size: 1.2rem;">«Твёрд как камень, един в племени — выживает сильнейший, но чтящий законы острова»</p>
+        <p style="font-size: 0.85rem;">— Древний свод Эпштейна, высечен в базальте.</p>
     </div>
 
-    <!-- БЛОК ДОНАТА С УБЕГАЮЩЕЙ КНОПКОЙ -->
-    <div class="donate-box" id="donateBox">
-        <h3><i class="fas fa-heart" style="color:#ff7b89;"></i> Поддержать создателей</h3>
-        <p>Ваши донаты помогают растить новую эру AI-музыки! Нажми на кнопку, чтобы отправить contribution ... если сможешь её поймать :)</p>
-        <div style="position: relative; min-height: 100px; display: flex; justify-content: center; align-items: center;">
-            <button class="escape-btn" id="crazyDonateBtn">
-                <i class="fas fa-gem"></i> ЗАДОНАТИТЬ
-            </button>
-        </div>
-        <div class="warning-note">
-            <i class="fas fa-hand-peace"></i> PS: кнопка обладает свободой воли — поймай её, если достоин!
-        </div>
-    </div>
+    <hr>
 
     <footer>
-        <p>© 2025 • ДИМА НАУМОВ & ДИМА ЮРИН • Великие создатели AI-треков • <i class="fas fa-infinity"></i> бесконечный генератор хитов</p>
+        <i class="fas fa-dharmachakra"></i> Сервер «Остров Эпштейна» • Каменный век • Правила действуют с сезона I • <i class="fas fa-gem"></i> Налоги идут на общую стройку: маяк, портал в Незер, туннели • 1 шаг в аду = 4 шага в обычном мире <i class="fas fa-arrow-right"></i> <br>
+        Для связи с советом старейшин — напишите на каменном скрижали /mail StoneCouncil.
     </footer>
 </div>
-
-<script>
-    // === 1. Звездное небо (декорация) ===
-    function createStars() {
-        const starsContainer = document.getElementById('starsContainer');
-        const starCount = 200;
-        for (let i = 0; i < starCount; i++) {
-            const star = document.createElement('div');
-            star.classList.add('star');
-            const size = Math.random() * 3 + 1;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 5 + 's';
-            star.style.animationDuration = Math.random() * 3 + 2 + 's';
-            starsContainer.appendChild(star);
-        }
-    }
-    createStars();
-
-    // === 2. Эффект свечения за курсором (просто стиль) ===
-    const cursorGlow = document.getElementById('glowCursor');
-    document.addEventListener('mousemove', (e) => {
-        cursorGlow.style.left = e.clientX + 'px';
-        cursorGlow.style.top = e.clientY + 'px';
-    });
-
-    // === 3. ГЛАВНАЯ ФИШКА: УБЕГАЮЩАЯ КНОПКА ===
-    const btn = document.getElementById('crazyDonateBtn');
-    const donateBox = document.getElementById('donateBox');
-    
-    // Функция для получения безопасных границ внутри контейнера donateBox (чтобы кнопка не вылетала за пределы видимой области)
-    function getSafeBounds() {
-        if (!donateBox || !btn) return null;
-        const boxRect = donateBox.getBoundingClientRect();
-        const btnRect = btn.getBoundingClientRect();
-        // относительно donateBox (родительский контейнер с относительным/абсолютным позиционированием)
-        // Мы будем позиционировать кнопку абсолютно внутри donateBox, но надо учесть отступы.
-        // Для плавности зададим стиль position: absolute для кнопки, когда начинаем убегать.
-        // Но для того чтобы кнопка не сломала layout, переведем её в абсолютное позиционирование внутри donateBox,
-        // а внутри контейнера где она сейчас (div-обертка) должен быть position: relative.
-        const wrapper = btn.parentElement;
-        if (!wrapper) return null;
-        // убедимся что wrapper имеет относительное позиционирование
-        if (getComputedStyle(wrapper).position !== 'relative') {
-            wrapper.style.position = 'relative';
-        }
-        // теперь границы: ширина wrapper минус ширина кнопки, высота wrapper минус высота кнопки
-        const wrapperRect = wrapper.getBoundingClientRect();
-        const maxX = wrapperRect.width - btnRect.width;
-        const maxY = wrapperRect.height - btnRect.height;
-        // минимальные отступы чтобы не прилипала к краям совсем
-        return { maxX: Math.max(10, maxX), maxY: Math.max(10, maxY), wrapperRect };
-    }
-
-    // функция для "убегания" кнопки
-    function makeButtonEscape(e) {
-        if (!btn) return;
-        // Если кнопка еще не имеет абсолютного позиционирования - делаем её абсолютной внутри враппера
-        const wrapper = btn.parentElement;
-        if (!wrapper) return;
-        if (getComputedStyle(btn).position !== 'absolute') {
-            // фиксируем текущее положение относительно wrapper'а
-            const originalRect = btn.getBoundingClientRect();
-            const wrapperRect = wrapper.getBoundingClientRect();
-            const currentLeft = originalRect.left - wrapperRect.left;
-            const currentTop = originalRect.top - wrapperRect.top;
-            btn.style.position = 'absolute';
-            btn.style.left = currentLeft + 'px';
-            btn.style.top = currentTop + 'px';
-            btn.style.margin = '0';
-        }
-        
-        const bounds = getSafeBounds();
-        if (!bounds) return;
-        
-        // получаем новые координаты: убегаем от мыши / курсора
-        let mouseX, mouseY;
-        if (e && (e.clientX || e.touches)) {
-            if (e.touches) {
-                mouseX = e.touches[0].clientX;
-                mouseY = e.touches[0].clientY;
-            } else {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            }
-            const wrapperRect = bounds.wrapperRect;
-            // относительные координаты мыши внутри wrapper
-            const relX = mouseX - wrapperRect.left;
-            const relY = mouseY - wrapperRect.top;
-            const btnWidth = btn.offsetWidth;
-            const btnHeight = btn.offsetHeight;
-            
-            // направление убегания: вектор от мыши к центру кнопки (текущая позиция)
-            let currentLeft = parseFloat(btn.style.left);
-            let currentTop = parseFloat(btn.style.top);
-            if (isNaN(currentLeft)) currentLeft = 0;
-            if (isNaN(currentTop)) currentTop = 0;
-            
-            const btnCenterX = currentLeft + btnWidth/2;
-            const btnCenterY = currentTop + btnHeight/2;
-            let dx = btnCenterX - relX;
-            let dy = btnCenterY - relY;
-            const len = Math.hypot(dx, dy);
-            if (len < 0.1) {
-                dx = (Math.random() - 0.5) * 100;
-                dy = (Math.random() - 0.5) * 100;
-            } else {
-                // нормализуем и делаем прыжок сильный
-                const force = Math.min(180, 500 / (len + 20)) + 65; // сила отскока
-                dx = (dx / len) * force;
-                dy = (dy / len) * force;
-            }
-            
-            let newLeft = currentLeft + dx;
-            let newTop = currentTop + dy;
-            
-            // ограничения в пределах wrapper
-            newLeft = Math.min(Math.max(0, newLeft), bounds.maxX);
-            newTop = Math.min(Math.max(0, newTop), bounds.maxY);
-            
-            // плавный переход без анимации, чтобы мгновенно убегала
-            btn.style.left = newLeft + 'px';
-            btn.style.top = newTop + 'px';
-        } else {
-            // если нет события (инициализация), делаем случайное смещение для веселья
-            const randX = Math.random() * bounds.maxX;
-            const randY = Math.random() * bounds.maxY;
-            btn.style.left = Math.min(bounds.maxX, Math.max(0, randX)) + 'px';
-            btn.style.top = Math.min(bounds.maxY, Math.max(0, randY)) + 'px';
-        }
-    }
-    
-    // При наведении мыши или попытке нажать, кнопка сбегает
-    function bindEscapeEvents() {
-        if (!btn) return;
-        // убегает при наведении мыши (hover) – ещё до клика
-        btn.addEventListener('mouseenter', (e) => {
-            makeButtonEscape(e);
-        });
-        // убегает при движении мыши над кнопкой (на случай если курсор уже над ней)
-        btn.addEventListener('mousemove', (e) => {
-            makeButtonEscape(e);
-        });
-        // для сенсорных устройств: при касании пальцем убегает
-        btn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            makeButtonEscape(e);
-        });
-        btn.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            makeButtonEscape(e);
-        });
-        // Дополнительно: убегает при попытке клика (кликнуть невозможно, тк перед кликом mouseenter/mousemove сработает)
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            // показываем насмешливое сообщение, что кнопка увернулась
-            const fakeAlert = document.createElement('div');
-            fakeAlert.innerText = '💨 Кнопка улизнула! Великие Димы говорят: "Попробуй ещё, но шансов мало" 💨';
-            fakeAlert.style.position = 'fixed';
-            fakeAlert.style.bottom = '20px';
-            fakeAlert.style.left = '50%';
-            fakeAlert.style.transform = 'translateX(-50%)';
-            fakeAlert.style.background = '#1f1b2e';
-            fakeAlert.style.color = '#ffdf8c';
-            fakeAlert.style.padding = '12px 24px';
-            fakeAlert.style.borderRadius = '60px';
-            fakeAlert.style.fontWeight = 'bold';
-            fakeAlert.style.zIndex = '10000';
-            fakeAlert.style.backdropFilter = 'blur(12px)';
-            fakeAlert.style.border = '1px solid gold';
-            fakeAlert.style.fontFamily = 'inherit';
-            fakeAlert.style.fontSize = '0.9rem';
-            document.body.appendChild(fakeAlert);
-            setTimeout(() => { fakeAlert.remove(); }, 2000);
-            // после клика также еще раз убегаем
-            makeButtonEscape(e);
-        });
-        
-        // при изменении размера окна пересчитываем границы, чтобы кнопка не вылетала
-        window.addEventListener('resize', () => {
-            if (getComputedStyle(btn).position === 'absolute') {
-                const bounds = getSafeBounds();
-                if (bounds) {
-                    let left = parseFloat(btn.style.left);
-                    let top = parseFloat(btn.style.top);
-                    if (isNaN(left)) left = 0;
-                    if (isNaN(top)) top = 0;
-                    left = Math.min(Math.max(0, left), bounds.maxX);
-                    top = Math.min(Math.max(0, top), bounds.maxY);
-                    btn.style.left = left + 'px';
-                    btn.style.top = top + 'px';
-                }
-            }
-        });
-    }
-    
-    // небольшая дополнительная инициализация: если кнопка пытается "сбежать" сразу после загрузки, зададим случайную позицию
-    function initCrazyButton() {
-        const wrapper = btn.parentElement;
-        if (wrapper && getComputedStyle(wrapper).position !== 'relative') {
-            wrapper.style.position = 'relative';
-        }
-        // сначала оставим статичную? но зададим начальный отступ
-        btn.style.position = 'relative'; // пока относительная, но при первом наведении станет абсолютной.
-        // чтобы сразу немного "дразнилась", сделаем псевдо-убегание через секунду? можно через 0.5с переместить относительное положение не меняя flow? 
-        // Но лучше просто подготовить почву. Добавим эффект подмигивания.
-        setTimeout(() => {
-            if (btn && getComputedStyle(btn).position !== 'absolute') {
-                // легкий сдвиг для интриги
-                btn.style.transform = 'translateX(3px)';
-                setTimeout(() => { if(btn) btn.style.transform = ''; }, 200);
-            }
-        }, 1000);
-        bindEscapeEvents();
-    }
-    
-    // Убегание также и при загрузке страницы, чтобы кнопка сразу была "живой" - при движении мыши в любом месте над боксом? 
-    // Но лучше добавить, что если мышь приближается к донат-блоку, кнопка тоже дергается, добавим на donateBox
-    function addBoxEscape() {
-        if (!donateBox) return;
-        donateBox.addEventListener('mousemove', (e) => {
-            // если кнопка уже в абсолютном режиме и мышь находится близко к кнопке, вызываем побег
-            if (btn && getComputedStyle(btn).position === 'absolute') {
-                const btnRect = btn.getBoundingClientRect();
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-                const distance = Math.hypot(mouseX - (btnRect.left + btnRect.width/2), mouseY - (btnRect.top + btnRect.height/2));
-                if (distance < 100) {
-                    makeButtonEscape(e);
-                }
-            }
-        });
-    }
-    
-    initCrazyButton();
-    addBoxEscape();
-    
-    // Доп. юмор: кнопка иногда сама "дрожит" раз в 5 секунд, если долго не трогать
-    let idleTimeout;
-    function resetIdleJitter() {
-        if(idleTimeout) clearTimeout(idleTimeout);
-        idleTimeout = setTimeout(() => {
-            if (btn && getComputedStyle(btn).position === 'absolute') {
-                const bounds = getSafeBounds();
-                if (bounds && bounds.maxX > 10) {
-                    let newX = Math.random() * bounds.maxX;
-                    let newY = Math.random() * bounds.maxY;
-                    btn.style.transition = 'left 0.2s ease, top 0.2s ease';
-                    btn.style.left = newX + 'px';
-                    btn.style.top = newY + 'px';
-                    setTimeout(() => { if(btn) btn.style.transition = ''; }, 200);
-                }
-            }
-        }, 7000);
-    }
-    document.addEventListener('mousemove', resetIdleJitter);
-    resetIdleJitter();
-    
-    // маленькая фишка, чтобы текст кнопки иногда менялся? не обязательно, но весело
-    const btnTexts = ['💰 ЗАДОНАТИТЬ', '🏃‍♂️ ЛОВИ', '💸 НЕ ПОЙМАЕШЬ', '✨ AI ДОНАТ', '🎧 СПОНСОРЫ'];
-    let textIndex = 0;
-    setInterval(() => {
-        if(btn && document.hasFocus()) {
-            textIndex = (textIndex+1) % btnTexts.length;
-            const iconPart = '<i class="fas fa-gem"></i> ';
-            btn.innerHTML = iconPart + btnTexts[textIndex];
-        }
-    }, 4000);
-</script>
 </body>
 </html>
