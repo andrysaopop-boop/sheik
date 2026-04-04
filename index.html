@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Остров Эпштейна | Президент Никита • Чёрное стекло</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Cinzel:wght@400;500;600;700&family=MedievalSharp&display=swap" rel="stylesheet">
+    <title>Остров Эпштейна | Президент Никита • Чёрное стекло • Каменный век</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Cinzel:wght@400;500;600;700;800;900&family=MedievalSharp&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -15,83 +15,121 @@
 
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at 30% 20%, #0c0c10 0%, #000000 100%);
+            background: radial-gradient(ellipse at 25% 20%, #0a0a0f 0%, #000000 100%);
             background-attachment: fixed;
             font-family: 'Inter', sans-serif;
-            color: #f0e7d8;
+            color: #ecdcc9;
             padding: 2rem 1.5rem;
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Жидкое стекло — подвижные блики на весь фон */
+        /* ========== ЖИДКОЕ СТЕКЛО: ОСНОВНОЙ ФОНОВЫЙ БЛИК ========== */
         body::before {
             content: "";
             position: fixed;
-            top: -30%;
-            left: -30%;
-            width: 160%;
-            height: 160%;
-            background: radial-gradient(ellipse at 40% 50%, rgba(255,240,200,0.08) 0%, rgba(255,200,100,0.02) 40%, transparent 70%);
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 30% 40%, rgba(255,215,130,0.12) 0%, rgba(255,160,60,0.05) 35%, transparent 70%);
             pointer-events: none;
             z-index: 0;
-            animation: liquidMove 18s infinite alternate ease-in-out;
+            animation: liquidGlassFlow 22s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            filter: blur(28px);
         }
 
+        /* Второй подвижный слой для эффекта текучего стекла */
         body::after {
             content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(45deg, rgba(255,215,140,0.02) 0px, rgba(255,215,140,0.02) 2px, transparent 2px, transparent 12px);
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: repeating-linear-gradient(115deg, 
+                        rgba(210, 170, 90, 0.04) 0px, 
+                        rgba(210, 170, 90, 0.04) 3px, 
+                        transparent 3px, 
+                        transparent 18px);
             pointer-events: none;
             z-index: 0;
+            animation: shimmerMove 14s infinite linear;
         }
 
-        @keyframes liquidMove {
+        @keyframes liquidGlassFlow {
             0% {
-                transform: translate(-5%, -5%) rotate(0deg);
-                opacity: 0.5;
+                transform: translate(-3%, -3%) rotate(-2deg);
+                opacity: 0.6;
             }
             100% {
-                transform: translate(5%, 5%) rotate(3deg);
+                transform: translate(6%, 4%) rotate(3deg);
                 opacity: 1;
             }
         }
 
-        /* Стиль всех стеклянных карточек — frosted glass + жидкий блеск */
+        @keyframes shimmerMove {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 100%;
+            }
+        }
+
+        /* ========== КАРТОЧКИ: СТЕКЛО + ГЛЯНЕЦ + ТЕКУЧИЙ ХРОМ ========== */
         .glass-card {
-            background: rgba(10, 10, 15, 0.55);
-            backdrop-filter: blur(14px) saturate(180%);
-            -webkit-backdrop-filter: blur(14px);
-            border-radius: 32px;
-            border: 1px solid rgba(210, 180, 110, 0.35);
-            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,245,200,0.1);
-            padding: 1.8rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
+            background: rgba(8, 8, 14, 0.58);
+            backdrop-filter: blur(16px) saturate(200%);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 44px;
+            border: 1px solid rgba(215, 185, 110, 0.45);
+            box-shadow: 0 28px 48px -14px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,245,200,0.2), 0 0 0 0.5px rgba(230,200,120,0.15);
+            padding: 2rem 1.8rem;
+            margin-bottom: 2.2rem;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             position: relative;
             z-index: 2;
+            overflow: hidden;
+        }
+
+        /* жидкий глянцевый уголок с анимацией */
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: -40%;
+            left: -20%;
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(ellipse at 20% 30%, rgba(255,235,170,0.18) 0%, rgba(255,210,100,0) 65%);
+            pointer-events: none;
+            transition: opacity 0.4s;
+            border-radius: 50%;
+        }
+
+        .glass-card:hover::before {
+            opacity: 0.9;
+            transform: scale(1.02);
         }
 
         .glass-card:hover {
-            background: rgba(15, 15, 22, 0.7);
-            border-color: rgba(220, 190, 110, 0.7);
-            box-shadow: 0 24px 48px -12px black, inset 0 1px 2px rgba(255,240,160,0.2);
+            background: rgba(14, 14, 22, 0.75);
+            border-color: rgba(230, 195, 110, 0.85);
+            box-shadow: 0 32px 56px -16px black, inset 0 1px 3px rgba(255,235,160,0.3);
+            transform: translateY(-3px);
         }
 
-        /* Эффект текучего стекла на карточках — глянцевый уголок */
+        /* дополнительный блеск */
         .glass-card::after {
             content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 32px;
-            background: linear-gradient(135deg, rgba(255,235,180,0.12) 0%, rgba(255,200,100,0) 60%);
+            bottom: 0;
+            right: 0;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255,215,120,0.08) 0%, transparent 80%);
             pointer-events: none;
+            border-radius: 50%;
         }
 
         .container {
@@ -101,148 +139,176 @@
             z-index: 3;
         }
 
-        /* Шапка с именем президента */
+        /* ГЕРОЙ — АГРЕССИВНЫЙ ГЛЯНЕЦ */
         .hero {
             text-align: center;
-            margin-bottom: 2.5rem;
-            padding: 1rem 0;
+            margin-bottom: 2rem;
+            padding: 0.5rem 0 1rem;
+            position: relative;
         }
         .hero h1 {
             font-family: 'Cinzel', 'MedievalSharp', serif;
-            font-size: 4.2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #f5e6c4, #cfb27c, #a8864e);
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #f3e7c2 10%, #dbb87a 40%, #c6984a 70%, #efd39c 100%);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            letter-spacing: 4px;
+            text-shadow: 0 4px 18px rgba(0,0,0,0.7);
+            letter-spacing: 6px;
+            filter: drop-shadow(0 2px 4px #00000050);
+            transition: all 0.2s;
         }
         .president-name {
-            display: inline-block;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(12px);
-            padding: 0.4rem 2rem;
-            border-radius: 60px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            border: 1px solid #dbb46a;
-            margin-top: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(20px);
+            padding: 0.6rem 2.4rem;
+            border-radius: 80px;
+            font-size: 1.45rem;
+            font-weight: 800;
+            border: 1px solid #e7c27a;
+            box-shadow: 0 0 12px rgba(230, 180, 70, 0.3);
+            margin-top: 1rem;
             font-family: 'Cinzel', monospace;
         }
         .president-name i {
-            color: #ecc27a;
-            margin-right: 10px;
+            color: #ffdf99;
+            font-size: 1.6rem;
         }
 
         .section-title {
             font-family: 'Cinzel', serif;
-            font-size: 1.9rem;
-            border-left: 6px solid #e7bc7b;
-            padding-left: 1rem;
-            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            font-weight: 700;
+            border-left: 7px solid #e7bc7b;
+            padding-left: 1.2rem;
+            margin-bottom: 1.4rem;
             display: flex;
             align-items: center;
             gap: 12px;
+            text-shadow: 0 1px 1px black;
+            letter-spacing: 1px;
         }
 
-        /* Налоговая плашка */
         .tax-liquid {
             background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 1rem 1.5rem;
-            margin: 1rem 0;
-            border-left: 5px solid #e7bc7b;
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            border-left: 5px solid #f5c67a;
+            transition: 0.2s;
         }
         .big-percent {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
-            color: #ffdd99;
+            color: #ffeaae;
+            text-shadow: 0 0 5px #b57c1c;
+            display: inline-block;
+            margin-right: 16px;
         }
 
-        /* Профессии */
+        /* профессии — агрессивные стеклянные чипсы */
         .prof-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
-            margin: 1.2rem 0;
+            gap: 0.9rem;
+            margin: 1.5rem 0 0.8rem;
         }
         .prof-item {
-            background: rgba(20, 20, 28, 0.7);
-            backdrop-filter: blur(8px);
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            font-weight: 600;
-            border: 1px solid #ab8b54;
-            font-size: 0.9rem;
+            background: rgba(20, 18, 26, 0.8);
+            backdrop-filter: blur(12px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            font-weight: 700;
+            border: 1px solid #c9a459;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            letter-spacing: 0.3px;
+        }
+        .prof-item:hover {
+            border-color: #ffcf7a;
+            background: rgba(30, 28, 38, 0.9);
+            transform: scale(1.02);
         }
 
-        /* Шахты дуэт */
+        /* шахты */
         .mines-flex {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
-            margin: 1.5rem 0;
+            margin: 1.5rem 0 1rem;
         }
         .mine-card {
             flex: 1;
-            background: rgba(8, 8, 12, 0.65);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            padding: 1.5rem;
-            border-top: 4px solid;
-            transition: 0.2s;
+            background: rgba(6, 6, 12, 0.7);
+            backdrop-filter: blur(14px);
+            border-radius: 34px;
+            padding: 1.8rem;
+            border-top: 6px solid;
+            transition: all 0.25s;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.5);
         }
         .mine-card.danger {
-            border-top-color: #dd5a3a;
+            border-top-color: #dd4a2c;
+            background: linear-gradient(145deg, rgba(25,10,8,0.6), rgba(8,8,16,0.75));
         }
         .mine-card.safe {
-            border-top-color: #6fa86b;
+            border-top-color: #6fbf6b;
+            background: linear-gradient(145deg, rgba(8,20,12,0.6), rgba(8,8,16,0.75));
         }
         .mine-title {
-            font-size: 1.7rem;
+            font-size: 1.9rem;
             font-weight: 800;
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .beacon-goal {
-            background: rgba(0, 0, 0, 0.55);
-            backdrop-filter: blur(12px);
-            border-radius: 28px;
-            padding: 1.2rem 1.8rem;
-            margin: 1rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(16px);
+            border-radius: 34px;
+            padding: 1.5rem 2rem;
+            margin: 1.2rem 0;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 1rem;
-            border: 1px solid #c9a15b;
+            gap: 1.5rem;
+            border: 1px solid #dcb268;
         }
 
         .decree {
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(12px);
             border-left: 8px solid #e7bc7b;
-            padding: 1rem 1.6rem;
-            margin: 1rem 0;
-            border-radius: 20px;
-            font-style: italic;
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            border-radius: 28px;
+            font-style: normal;
+            font-weight: 500;
+            font-family: 'Cinzel', serif;
         }
 
         hr {
             border: none;
             height: 1px;
-            background: linear-gradient(90deg, transparent, #cfb27c, transparent);
-            margin: 1.2rem 0;
+            background: linear-gradient(90deg, transparent, #e7bc7b, #b87e32, #e7bc7b, transparent);
+            margin: 1.5rem 0;
         }
 
         footer {
             text-align: center;
-            margin-top: 2.5rem;
-            font-size: 0.8rem;
-            color: #aa9a7a;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(200, 170, 100, 0.3);
+            margin-top: 2.8rem;
+            font-size: 0.85rem;
+            color: #bcab88;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(200, 170, 100, 0.4);
+            backdrop-filter: blur(4px);
         }
 
         @media (max-width: 800px) {
@@ -250,56 +316,81 @@
                 padding: 1rem;
             }
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+                letter-spacing: 2px;
             }
             .mines-flex {
                 flex-direction: column;
             }
+            .glass-card {
+                padding: 1.3rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
         }
         .highlight {
-            color: #ffdd99;
-            font-weight: 700;
+            color: #ffeaae;
+            font-weight: 800;
+            text-shadow: 0 0 2px #aa6f2c;
         }
         i, .fas, .far {
-            margin-right: 6px;
+            margin-right: 8px;
         }
         ul {
             list-style: none;
             padding-left: 0;
         }
         li {
-            margin-bottom: 0.6rem;
-            padding-left: 1.4rem;
+            margin-bottom: 0.65rem;
+            padding-left: 1.7rem;
             position: relative;
+            font-weight: 500;
         }
         li:before {
-            content: "⛏️";
+            content: "⚡";
             position: absolute;
             left: 0;
             color: #e7bc7b;
             font-size: 0.9rem;
+            text-shadow: 0 0 2px #ffb347;
+        }
+        .danger li:before {
+            content: "💀";
+        }
+        .safe li:before {
+            content: "🛡️";
+        }
+        .glint-text {
+            font-family: 'MedievalSharp', cursive;
+        }
+        .btn-like {
+            display: inline-block;
+            background: rgba(0,0,0,0.5);
+            border-radius: 60px;
+            padding: 0.2rem 1rem;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="hero">
-        <h1><i class="fas fa-crown"></i> ОСТРОВ ЭПШТЕЙНА</h1>
-        <div class="president-name"><i class="fas fa-gavel"></i> ПРЕЗИДЕНТ ОСТРОВА — НИКИТА</div>
-        <div style="margin-top: 0.8rem; font-size: 0.9rem; opacity: 0.8;">⚒️ Чёрное стекло • Каменный век • Ванильный Майнкрафт ⚒️</div>
+        <h1><i class="fas fa-skull"></i> ОСТРОВ ЭПШТЕЙНА</h1>
+        <div class="president-name"><i class="fas fa-crown"></i> ПРЕЗИДЕНТ ОСТРОВА — НИКИТА <i class="fas fa-gavel"></i></div>
+        <div style="margin-top: 1rem; font-size: 0.95rem; opacity: 0.85; letter-spacing: 1px;">⚒️ ЧЁРНОЕ СТЕКЛО • КАМЕННЫЙ ВЕК • ВАНИЛЬНЫЙ МАЙНКРАФТ ⚒️</div>
     </div>
 
     <!-- 1. Единый налог 15% -->
     <div class="glass-card">
         <div class="section-title">
-            <i class="fas fa-scroll"></i>
+            <i class="fas fa-coins"></i>
             <span>Единый ресурсный налог — 15%</span>
         </div>
         <div class="tax-liquid">
-            <span class="big-percent">15% налог</span>
+            <span class="big-percent">⚔️ 15% налог ⚔️</span>
             <p style="margin-top: 8px;">с <span class="highlight">алмазов, древесины, обломков (незерит), каменных пород</span> и всех ценных ресурсов.</p>
             <p><i class="fas fa-archive"></i> <strong>Куда идут налоги?</strong> Все средства собираются в <strong>общую казну (сундук у Тронного зала)</strong>. Копим <span class="highlight">НА МАЯК, ПОРТАЛЫ И ВЕЛИКИЙ ТУННЕЛЬ</span>. <u class="highlight">На маяк копим, а не к нему казну приносим</u> — маяк станет наградой для всех.</p>
-            <p class="small" style="margin-top: 6px;"><i class="fas fa-calculator"></i> Округление налога: всегда в меньшую сторону (9 алмазов → 15% = 1.35 → отдаёшь 1 алмаз).</p>
+            <p class="small" style="margin-top: 8px;"><i class="fas fa-calculator"></i> Округление налога: всегда в меньшую сторону (9 алмазов → 15% = 1.35 → отдаёшь 1 алмаз).</p>
         </div>
         <p><i class="fas fa-landmark"></i> <strong>Без плагинов:</strong> каждый сам сдаёт ресурсы в общий сундук. Честь и совесть — главные законы острова.</p>
     </div>
@@ -307,13 +398,13 @@
     <!-- 2. Закон Панополии (профессии) -->
     <div class="glass-card">
         <div class="section-title">
-            <i class="fas fa-users"></i>
-            <span>Закон Панополии — выбери профессию</span>
+            <i class="fas fa-user-astronaut"></i>
+            <span>Закон Панополии — изреки стезю</span>
         </div>
-        <p><strong>Каждый игрок обязан избрать свою стезю.</strong> Без профессии — повышенный налог 25% до момента выбора.</p>
+        <p><strong>Каждый игрок обязан избрать свою профессию.</strong> Без стези — налог 25% до момента выбора.</p>
         <div class="prof-grid">
-            <span class="prof-item"><i class="fas fa-pickaxe"></i> Шахтёр</span>
-            <span class="prof-item"><i class="fas fa-tree"></i> Дровосек</span>
+            <span class="prof-item"><i class="fas fa-pickaxe"></i> Шахтёр (руды)</span>
+            <span class="prof-item"><i class="fas fa-tree"></i> Дровосек (древесина)</span>
             <span class="prof-item"><i class="fas fa-gem"></i> Искатель обломков</span>
             <span class="prof-item"><i class="fas fa-mountain"></i> Камнелом</span>
             <span class="prof-item"><i class="fas fa-hard-hat"></i> Строитель казны</span>
@@ -323,40 +414,40 @@
         <p><span class="highlight">Роспись:</span> Шахтёр (алмазы, руды), Дровосек (древесина для строек), Искатель обломков (незерит), Камнелом (камень, булыжник), Строитель казны (следит за общим сундуком), Проводник (порталы и туннель), Хранитель маяка (главный по сбору на маяк). Менять профессию — раз в 7 дней по указу президента Никиты.</p>
     </div>
 
-    <!-- 3. Опасная / Безопасная шахта -->
+    <!-- 3. Опасная / Безопасная шахта с крутым дизайном -->
     <div class="mines-flex">
         <div class="mine-card danger">
-            <div class="mine-title"><i class="fas fa-skull"></i> ОПАСНАЯ ШАХТА</div>
+            <div class="mine-title"><i class="fas fa-skull-crossbones"></i> ОПАСНАЯ ШАХТА</div>
             <ul>
                 <li><span class="highlight">Налог 0%</span> — вся добыча твоя (алмазы, обломки).</li>
-                <li><span class="highlight">Вход только когда 3+ игрока</span> — одиночкам вход запрещён.</li>
+                <li><span class="highlight">Вход только когда 3+ игрока</span> — одиночкам путь закрыт.</li>
                 <li><span class="highlight">Можно сражаться, ломать вещи, вандалить, воровать</span> — полный PvP и хаос.</li>
                 <li>Карта опасной шахты выдаётся <span class="highlight">каждому игроку</span> при первом заходе.</li>
                 <li>Без правил, но помни: любой может забрать твои алмазы.</li>
             </ul>
-            <div style="margin-top: 12px; font-size: 0.8rem;"><i class="fas fa-dragon"></i> Риск максимальный, добыча без налогов — только группой от 3 человек.</div>
+            <div style="margin-top: 14px; font-size: 0.85rem; background: rgba(0,0,0,0.5); border-radius: 28px; padding: 8px 12px;"><i class="fas fa-dragon"></i> ⚡ Риск максимальный, добыча без налогов — только группой от 3 человек.</div>
         </div>
         <div class="mine-card safe">
-            <div class="mine-title"><i class="fas fa-shield-alt"></i> БЕЗОПАСНАЯ ШАХТА</div>
+            <div class="mine-title"><i class="fas fa-shield-hart"></i> БЕЗОПАСНАЯ ШАХТА</div>
             <ul>
-                <li>Вход бесплатный, <span class="highlight">PvP и разрушения ЗАПРЕЩЕНЫ</span> — зона мира.</li>
+                <li>Вход свободный, <span class="highlight">PvP и разрушения ЗАПРЕЩЕНЫ</span> — зона мира.</li>
                 <li><span class="highlight">Налог 50%</span> с округлением <strong>в меньшую сторону</strong> (в твою пользу).</li>
                 <li>Все добытые ресурсы делятся: половина в казну (на маяк/порталы), половина тебе.</li>
                 <li>Идеально для спокойного фарма, новичков и тех, кто не хочет рисковать.</li>
                 <li>Никто не украдёт твою руду, не сломает верстак.</li>
             </ul>
-            <div style="margin-top: 12px; font-size: 0.8rem;"><i class="fas fa-hand-peace"></i> 50% налог, зато 100% безопасность.</div>
+            <div style="margin-top: 14px; font-size: 0.85rem; background: rgba(0,0,0,0.5); border-radius: 28px; padding: 8px 12px;"><i class="fas fa-hand-peace"></i> 50% налог, зато 100% безопасность и покой.</div>
         </div>
     </div>
 
-    <!-- 4. Маяк — цель стройки (копим НА него) -->
+    <!-- 4. Маяк — великая цель (копильный эффект) -->
     <div class="glass-card">
         <div class="section-title">
-            <i class="fas fa-lightbulb"></i>
-            <span>Маяк — великая цель</span>
+            <i class="fas fa-sun"></i>
+            <span>Маяк — сияние острова</span>
         </div>
         <div class="beacon-goal">
-            <div><i class="fas fa-gem" style="font-size: 2.5rem; color: #e7bc7b;"></i></div>
+            <div><i class="fas fa-gem" style="font-size: 2.8rem; color: #fad47c; filter: drop-shadow(0 0 6px gold);"></i></div>
             <div style="flex:1">
                 <p><strong class="highlight">ВНИМАНИЕ: НА МАЯК КОПИМ, А НЕ К НЕМУ КАЗНУ ПРИНОСИМ!</strong></p>
                 <p>Налоги собираются в <strong>общий сундук у Тронного зала</strong>. Когда накопится достаточно ресурсов (3 обсидиана, 5 стёкол, звезда Незера, 3 блока бекона) — <strong>строим маяк</strong> всем миром. Маяк даст эффекты: <span class="highlight">Скорость II и Поспешность II</span>, чтобы быстрее бегать и копать.</p>
@@ -372,13 +463,13 @@
             <span>Портал в Нижний мир • Туннель</span>
         </div>
         <div class="tax-liquid">
-            <p><span class="big-percent" style="font-size: 1.8rem;">1 шаг в аду = 4 шага в обычном мире</span></p>
+            <p><span class="big-percent" style="font-size: 2rem;">1 шаг в аду = 4 шага в обычном мире</span></p>
             <p>Строим <strong class="highlight">большой туннель в Нижнем мире</strong> для дальних путешествий. Через портал можно сократить путь в 4 раза! Часть налогов (из 15%) уходит на строительство туннеля. Каждый может внести обсидиан, камень или железо добровольно.</p>
             <p class="small"><i class="fas fa-tools"></i> Сбор на порталы и туннель идёт из общей казны — решает президент Никита.</p>
         </div>
     </div>
 
-    <!-- 6. Указы президента НИКИТЫ -->
+    <!-- 6. Указы президента НИКИТЫ (с усилением древности) -->
     <div class="glass-card">
         <div class="section-title">
             <i class="fas fa-crown"></i>
@@ -386,12 +477,12 @@
         </div>
         <p><strong>Никаких президентов зданий для раздумий не нужно.</strong> Никита — единственный правитель. Все решения принимает он, но с правом советоваться с народом.</p>
         <div class="decree">
-            <i class="fas fa-feather-alt"></i> <strong>Указ Президента Никиты №1:</strong> «Утвердить единый налог 15% на все ресурсы. Утвердить опасную шахту (только группами от 3 человек, PvP разрешён) и безопасную шахту (налог 50%, округление вниз). Копим на маяк, портал и туннель. Закон Панополии обязателен для всех. Да будет так.»<br>
-            <span style="display: inline-block; margin-top: 8px;">— <strong>Президент Никита</strong></span>
+            <i class="fas fa-scroll"></i> <strong>Указ Президента Никиты №1:</strong> «Утвердить единый налог 15% на все ресурсы. Утвердить опасную шахту (только группами от 3 человек, PvP разрешён) и безопасную шахту (налог 50%, округление вниз). Копим на маяк, портал и туннель. Закон Панополии обязателен для всех. Да будет так.»<br>
+            <span style="display: inline-block; margin-top: 10px;">— <strong>Президент Никита</strong> <i class="fas fa-signature"></i></span>
         </div>
         <div class="decree">
-            <i class="fas fa-feather-alt"></i> <strong>Указ Президента Никиты №2:</strong> «Запрещено сражаться и вандалить в безопасной шахте. Нарушители караются штрафом 30% инвентаря или временным изгнанием. В опасной шахте — полная свобода, но вход только в группе от 3 игроков. Карта опасной шахты выдаётся каждому.»<br>
-            <span style="display: inline-block; margin-top: 8px;">— <strong>Президент Никита</strong></span>
+            <i class="fas fa-scroll"></i> <strong>Указ Президента Никиты №2:</strong> «Запрещено сражаться и вандалить в безопасной шахте. Нарушители караются штрафом 30% инвентаря или временным изгнанием. В опасной шахте — полная свобода, но вход только в группе от 3 игроков. Карта опасной шахты выдаётся каждому.»<br>
+            <span style="display: inline-block; margin-top: 10px;">— <strong>Президент Никита</strong></span>
         </div>
         <p><i class="fas fa-gavel"></i> <strong>Полномочия Никиты:</strong> запуск строек, назначение ответственных, изменение налогов (в разумных пределах), суд над нарушителями, право вето. Раз в месяц — отчёт перед народом.</p>
     </div>
@@ -402,7 +493,7 @@
             <i class="fas fa-scroll"></i>
             <span>Каменный устав (коротко)</span>
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; flex-wrap: wrap; gap: 1.2rem;">
             <div style="flex:1;">
                 <h3><i class="fas fa-percent"></i> Налоги</h3>
                 <ul><li>15% — общий налог</li><li>50% — в безопасной шахте</li><li>0% — в опасной шахте (группа 3+)</li></ul>
@@ -413,11 +504,11 @@
             </div>
             <div style="flex:1;">
                 <h3><i class="fas fa-map"></i> Шахты</h3>
-                <ul><li>Опасная: 3+ игрока, PvP, без налога</li><li>Безопасная: мир, налог 50%</li></ul>
+                <ul><li>Опасная: 3+ игрока, PvP, налог 0%</li><li>Безопасная: мир, налог 50%</li></ul>
             </div>
         </div>
         <hr>
-        <p><i class="fas fa-dharmachakra"></i> <strong>Главная цель:</strong> копим на маяк, портал и туннель в аду. 1 шаг в аду = 4 шага в обычном мире. Президент — <strong>Никита</strong>. Ванильный сервер, всё на честном слове и уважении к законам острова. Эффект жидкого стекла — знак древней магии.</p>
+        <p><i class="fas fa-dharmachakra"></i> <strong>Главная цель:</strong> копим на маяк, портал и туннель в аду. 1 шаг в аду = 4 шага в обычном мире. Президент — <strong>Никита</strong>. Ванильный сервер, всё на честном слове и уважении к законам острова. Эффект жидкого стекла — знак древней магии и глянца.</p>
     </div>
 
     <footer>
