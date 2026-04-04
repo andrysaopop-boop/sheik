@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Остров Эпштейна | Каменный век • Ванильный Майнкрафт</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=MedievalSharp&display=swap" rel="stylesheet">
+    <title>Остров Эпштейна | Белый камень • Древний свиток</title>
+    <!-- Антикварные шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&family=MedievalSharp&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -14,15 +15,15 @@
         }
 
         body {
-            background: #0c0a07;
-            background-image: radial-gradient(circle at 25% 40%, #1e1912 0%, #080705 100%);
-            color: #e0d6c6;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.45;
+            background: #fef7e8;
+            background-image: radial-gradient(circle at 25% 40%, #fff7e8 0%, #f3ebd8 100%);
+            color: #2c2418;
+            font-family: 'Cormorant Garamond', 'Inter', serif;
+            line-height: 1.5;
             position: relative;
         }
 
-        /* Каменная текстура поверх */
+        /* Античная текстура пергамента */
         body::before {
             content: "";
             position: fixed;
@@ -30,7 +31,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.08"><path d="M20,30 L40,20 L60,30 L80,22 L100,35 L120,28 L140,38 L160,30 L180,40" stroke="%238b7355" fill="none" stroke-width="1.5"/><path d="M10,70 L35,60 L55,72 L75,65 L95,78 L115,68 L135,80 L155,70 L175,82 L190,75" stroke="%23927a5a" fill="none" stroke-width="1"/><rect x="30" y="110" width="12" height="12" fill="%236b4e2e" opacity="0.6"/><rect x="90" y="140" width="10" height="10" fill="%235a3e1e" opacity="0.5"/><rect x="150" y="100" width="14" height="8" fill="%237a5e3a" opacity="0.5"/><path d="M50,160 L80,150 L110,165 L140,155 L170,162" stroke="%238b6f48" fill="none" stroke-width="1.2"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" opacity="0.08"><path d="M50,30 L350,30 L350,570 L50,570 Z" fill="none" stroke="%238a6e4b" stroke-width="1.5"/><path d="M70,50 L330,50 L330,550 L70,550 Z" fill="none" stroke="%239b7e5a" stroke-width="0.8"/><path d="M100,100 L300,100 M100,150 L280,150 M120,200 L320,200" stroke="%23b59872" stroke-width="0.5" stroke-dasharray="4 4"/><circle cx="200" cy="400" r="30" fill="none" stroke="%23c4a882" stroke-width="1"/></svg>');
             background-repeat: repeat;
             pointer-events: none;
             z-index: 0;
@@ -39,187 +40,199 @@
         .container {
             max-width: 1280px;
             margin: 0 auto;
-            padding: 2rem 1.8rem 4rem;
+            padding: 2rem 2rem 4rem;
             position: relative;
             z-index: 2;
         }
 
-        /* Шапка — грубый камень */
+        /* Заголовок — древняя вязь */
         .hero {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0 1.5rem;
-            border-bottom: 3px solid #b48b4b;
-            border-image: repeating-linear-gradient(90deg, #b48b4b, #6a4e2a, #b48b4b) 1;
-            border-bottom-style: solid;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem 0 1rem;
+            border-bottom: 2px solid #d4c2a2;
         }
         .hero h1 {
-            font-family: 'MedievalSharp', 'Inter', cursive;
+            font-family: 'MedievalSharp', 'Cormorant Garamond', cursive;
             font-size: 4rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #efdba1, #c69c5c, #9e6f3a);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            text-shadow: 4px 4px 12px rgba(0,0,0,0.7);
-            margin-bottom: 0.5rem;
+            letter-spacing: 4px;
+            color: #4a3724;
+            text-shadow: 2px 2px 6px rgba(100, 70, 40, 0.15);
+            font-weight: 500;
         }
         .hero .sub {
             font-size: 1.2rem;
-            color: #bea十六;
+            color: #7a6548;
             font-style: italic;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            margin-top: 0.3rem;
         }
-        .hero .vanilla-badge {
-            background: #2a241cb3;
+        .president-badge {
             display: inline-block;
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
+            background: #e9dfce;
+            padding: 0.4rem 1.4rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #5a3e2a;
+            border: 1px solid #cbb786;
             margin-top: 1rem;
-            border: 1px solid #a9814b;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
 
-        /* Карточки с каменной окантовкой */
+        /* Белые каменные карточки */
         .stone-card {
-            background: rgba(20, 16, 12, 0.85);
-            backdrop-filter: blur(3px);
-            border: 1px solid #69563e;
-            border-radius: 28px 16px 28px 12px;
-            box-shadow: 0 15px 30px -10px black;
+            background: rgba(255, 250, 240, 0.92);
+            backdrop-filter: blur(2px);
+            border: 1px solid #e2d5bd;
+            border-radius: 24px 12px 24px 12px;
+            box-shadow: 0 12px 28px -10px rgba(0,0,0,0.1);
             padding: 1.8rem;
             margin-bottom: 2rem;
             transition: 0.2s;
         }
         .stone-card:hover {
-            border-color: #c9a15b;
-            background: rgba(28, 22, 16, 0.92);
+            background: rgba(255, 252, 245, 0.98);
+            border-color: #cfbc96;
         }
+
         .card-title {
-            font-family: 'MedievalSharp', monospace;
+            font-family: 'MedievalSharp', 'Cormorant Garamond', serif;
             font-size: 1.9rem;
             font-weight: 600;
-            border-left: 8px solid #e0a95b;
+            border-left: 6px solid #c2a15b;
             padding-left: 1rem;
-            margin-bottom: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: #3a2c1c;
             display: flex;
             align-items: center;
             gap: 12px;
         }
         .card-title i {
-            color: #e0a95b;
+            color: #b48b48;
             font-size: 1.6rem;
         }
 
-        /* Налоговая зона */
-        .tax-highlight {
-            background: #1d1812;
+        /* Налоговая рамка */
+        .tax-parchment {
+            background: #fcf7ef;
             border-radius: 20px;
-            padding: 1.2rem 1.6rem;
+            padding: 1rem 1.6rem;
             margin: 1rem 0;
-            border-left: 6px solid #f3bc5c;
+            border-left: 5px solid #c9aa6f;
+            box-shadow: inset 0 0 0 1px #fff8e8, 0 2px 8px rgba(0,0,0,0.02);
         }
         .big-percent {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #ffda88;
-            line-height: 1;
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: #8b6946;
+            font-family: 'MedievalSharp', monospace;
         }
 
-        /* Профессии */
-        .prof-list {
+        /* Сетка профессий */
+        .prof-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
+            gap: 0.7rem;
             margin: 1.2rem 0;
         }
         .prof-tag {
-            background: #282018;
-            padding: 0.5rem 1.2rem;
-            border-radius: 50px;
+            background: #f3ecdf;
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
             font-weight: 600;
-            border: 1px solid #a57c48;
             font-size: 0.9rem;
+            border: 1px solid #dac29c;
+            color: #4f3a26;
         }
         .prof-tag i {
             margin-right: 8px;
-            color: #f0bc6c;
+            color: #b68b40;
         }
 
         /* Две шахты */
-        .mine-duo {
+        .mines-row {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             margin: 1.5rem 0;
         }
-        .mine-box {
+        .mine-card {
             flex: 1;
-            background: #15110d;
+            background: #fffaf2;
             border-radius: 28px;
-            padding: 1.6rem;
-            transition: transform 0.15s;
+            padding: 1.5rem;
+            border: 1px solid #e2cfb0;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.04);
         }
-        .mine-box.danger {
-            border-top: 5px solid #cb4e32;
-            box-shadow: 0 4px 15px rgba(200, 70, 30, 0.2);
+        .mine-card.danger {
+            border-top: 6px solid #bd6b4a;
         }
-        .mine-box.safe {
-            border-top: 5px solid #5f9460;
+        .mine-card.safe {
+            border-top: 6px solid #6c9e6a;
         }
         .mine-title {
-            font-size: 1.7rem;
-            font-weight: 800;
+            font-size: 1.6rem;
+            font-weight: 700;
             margin-bottom: 1rem;
+            font-family: 'MedievalSharp', serif;
         }
-        .mine-box ul {
+        .mine-card ul {
             list-style: none;
             padding-left: 0;
         }
-        .mine-box li {
-            margin-bottom: 0.7rem;
-            padding-left: 1.6rem;
+        .mine-card li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.5rem;
             position: relative;
         }
-        .mine-box li:before {
-            content: "⛏️";
+        .mine-card li:before {
+            content: "✦";
             position: absolute;
             left: 0;
-            color: #cf9f5a;
-            font-size: 0.9rem;
+            color: #b48b48;
         }
 
-        /* Маяк — цель сбора */
+        /* Указы президента */
+        .decree {
+            background: #fcf5e8;
+            border-left: 8px solid #8b6946;
+            padding: 1.2rem 1.8rem;
+            margin: 1rem 0;
+            font-style: italic;
+            border-radius: 16px;
+        }
+        .decree strong {
+            font-style: normal;
+            font-weight: 800;
+            color: #5a3a24;
+        }
+
         .beacon-goal {
-            background: #1e1912;
-            border-radius: 28px;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            background: #f8f0e2;
+            border-radius: 24px;
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            gap: 1.2rem;
-            border: 1px solid #b88a48;
-        }
-        .beacon-text {
-            font-weight: 600;
+            gap: 1rem;
         }
 
         hr {
             border: none;
             height: 1px;
-            background: linear-gradient(90deg, #54472e, #c2a15b, #54472e);
+            background: linear-gradient(90deg, #ddd0b8, #c2a15b, #ddd0b8);
             margin: 1.5rem 0;
         }
 
         .footer {
             text-align: center;
             margin-top: 3rem;
-            font-size: 0.8rem;
-            color: #9e8b6b;
-            border-top: 1px solid #4f3f2c;
+            font-size: 0.85rem;
+            color: #9b8468;
+            border-top: 1px solid #e2d0b4;
             padding-top: 2rem;
         }
 
@@ -230,54 +243,50 @@
             .hero h1 {
                 font-size: 2.5rem;
             }
-            .mine-duo {
+            .mines-row {
                 flex-direction: column;
             }
-            .card-title {
-                font-size: 1.5rem;
-            }
         }
-        .important {
-            color: #ffcf7a;
+        .highlight {
+            color: #8b5e2e;
             font-weight: 700;
         }
-        .small-note {
-            font-size: 0.85rem;
-            color: #bcac88;
+        .ancient-sign {
+            font-family: 'MedievalSharp', monospace;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="hero">
-        <h1>ОСТРОВ ЭПШТЕЙНА</h1>
-        <div class="sub">⚒️ КАМЕННЫЙ ВЕК • ВАНИЛЬНЫЙ СЕРВЕР ⚒️</div>
-        <div class="vanilla-badge"><i class="fas fa-cube"></i> Чистый ваниль • Без плагинов • Всё на честном слове</div>
+        <h1><i class="fas fa-crown"></i> ОСТРОВ ЭПШТЕЙНА</h1>
+        <div class="sub">Белый камень • Древний свиток • Ванильный Майнкрафт</div>
+        <div class="president-badge"><i class="fas fa-gavel"></i> Президент Острова — <strong>ТЫ</strong> (Верховный Правитель)</div>
     </div>
 
-    <!-- 1. Единый налог 15% на общую стройку (маяк, порталы, туннель) -->
+    <!-- 1. Единый налог 15% (копим на маяк) -->
     <div class="stone-card">
         <div class="card-title">
             <i class="fas fa-scroll"></i>
             <span>Единый ресурсный налог — 15%</span>
         </div>
-        <div class="tax-highlight">
-            <div class="big-percent">15%</div>
-            <p style="margin-top: 8px;"><strong class="important">Алмазы / Древесина / Обломки (незерит) / Каменные породы</strong> — с каждого ресурса ты отдаёшь 15% в <span class="important">общую казну острова</span>.</p>
-            <p>Эти налоги идут <span class="important">НА ОБЩУЮ СТРОЙКУ:</span> <strong>маяк, порталы в Нижний мир, огромный туннель для дальних путешествий</strong>. Копим все вместе, строим сообща!</p>
-            <p class="small-note" style="margin-top: 8px;"><i class="fas fa-calculator"></i> Округление налога — всегда в меньшую сторону (пример: 9 алмазов → 15% = 1.35 → отдаёшь 1 алмаз).</p>
+        <div class="tax-parchment">
+            <div class="big-percent">15% налог</div>
+            <p>с <span class="highlight">алмазов, древесины, обломков (незерит), каменных пород</span> и всех ценных ресурсов.</p>
+            <p><i class="fas fa-archive"></i> <strong>Куда идут налоги?</strong> Все средства собираются в <strong>общую казну (сундук у Тронного зала)</strong>. Копим <span class="highlight">НА МАЯК, ПОРТАЛЫ И ВЕЛИКИЙ ТУННЕЛЬ</span>. <u>На маяк копим, а не к нему казну приносим</u> — маяк станет наградой для всех.</p>
+            <p class="small" style="margin-top: 6px;"><i class="fas fa-calculator"></i> Округление налога: всегда в меньшую сторону (9 алмазов → 15% = 1.35 → отдаёшь 1 алмаз).</p>
         </div>
-        <p><i class="fas fa-archive"></i> <strong>Как собираем налоги без плагинов?</strong> У маяка (когда построим) и у главного сундука-копилки стоит общий сундук. Каждый игрок сам сдаёт туда свою долю. Всё на честности — репутация важнее алмазов.</p>
+        <p><i class="fas fa-landmark"></i> <strong>Без плагинов:</strong> каждый сам сдаёт ресурсы в общий сундук. Честь и совесть — главные законы острова.</p>
     </div>
 
-    <!-- 2. Закон о Панополии — профессии -->
+    <!-- 2. Закон Панополии (профессии) -->
     <div class="stone-card">
         <div class="card-title">
             <i class="fas fa-users"></i>
             <span>Закон Панополии — выбери профессию</span>
         </div>
-        <p><strong>Каждый игрок обязан выбрать свою стезю!</strong> Это определяет твой вклад в развитие острова. Без профессии — повышенный налог 25% до момента выбора.</p>
-        <div class="prof-list">
+        <p><strong>Каждый игрок обязан избрать свою стезю.</strong> Без профессии — повышенный налог 25% до момента выбора.</p>
+        <div class="prof-grid">
             <span class="prof-tag"><i class="fas fa-pickaxe"></i> Шахтёр</span>
             <span class="prof-tag"><i class="fas fa-tree"></i> Дровосек</span>
             <span class="prof-tag"><i class="fas fa-gem"></i> Искатель обломков</span>
@@ -286,109 +295,120 @@
             <span class="prof-tag"><i class="fas fa-route"></i> Проводник туннелей</span>
             <span class="prof-tag"><i class="fas fa-shield-alt"></i> Хранитель маяка</span>
         </div>
-        <p><span class="important">Роспись:</span> Шахтёр — добыча руд (алмазы, железо); Дровосек — заготовка древесины для строек; Искатель обломков — охота за незеритом в аду; Камнелом — камень, булыжник, андезит; Строитель казны — следит за общим сундуком; Проводник — отвечает за порталы и туннель; Хранитель маяка — главный по сбору на маяк. Менять профессию можно раз в 7 дней.</p>
+        <p><span class="highlight">Роспись:</span> Шахтёр (алмазы, руды), Дровосек (древесина для строек), Искатель обломков (незерит), Камнелом (камень, булыжник), Строитель казны (следит за общим сундуком), Проводник (порталы и туннель), Хранитель маяка (главный по сбору на маяк). Менять профессию — раз в 7 дней по указу президента.</p>
     </div>
 
-    <!-- 3. ДВЕ ШАХТЫ (ОПАСНАЯ / БЕЗОПАСНАЯ) -->
-    <div class="mine-duo">
-        <!-- Опасная шахта -->
-        <div class="mine-box danger">
+    <!-- 3. Опасная и безопасная шахта -->
+    <div class="mines-row">
+        <div class="mine-card danger">
             <div class="mine-title"><i class="fas fa-skull"></i> ОПАСНАЯ ШАХТА</div>
             <ul>
-                <li><span class="important">Вход бесплатный</span> — налог <strong>0%</strong> на всё: алмазы, обломки, любую руду.</li>
-                <li><span class="important">⚠️ Заходить можно когда 3 или больше игрока</span> (вместе). Одиночкам вход запрещён.</li>
-                <li><span class="important">⚔️ Можно сражаться, ломать вещи, вандалить, красть добычу</span> — полный хаос и PvP.</li>
-                <li>Карта опасной шахты показывается <span class="important">каждому игроку</span> при первом входе на сервер.</li>
-                <li>Все добытые алмазы — твои, без налогов. Но помни: здесь нет правил.</li>
+                <li><span class="highlight">Налог 0%</span> — вся добыча твоя (алмазы, обломки, любая руда).</li>
+                <li><span class="highlight">Вход только когда 3+ игрока</span> — одиночкам вход запрещён древним проклятием.</li>
+                <li><span class="highlight">Можно сражаться, ломать вещи, вандалить, воровать</span> — полный PvP и хаос.</li>
+                <li>Карта опасной шахты выдаётся <span class="highlight">каждому игроку</span> при первом заходе на сервер.</li>
+                <li>Без правил, но помни: любой может забрать твои алмазы.</li>
             </ul>
-            <div class="small-note" style="margin-top: 12px;"><i class="fas fa-dragon"></i> Риск максимальный, добыча без пошлин — только в группе от 3 человек.</div>
+            <div class="small" style="margin-top: 12px;"><i class="fas fa-dragon"></i> Риск максимальный, добыча без налогов — только группой от 3 человек.</div>
         </div>
-        <!-- Безопасная шахта -->
-        <div class="mine-box safe">
+        <div class="mine-card safe">
             <div class="mine-title"><i class="fas fa-shield-alt"></i> БЕЗОПАСНАЯ ШАХТА</div>
             <ul>
-                <li>Вход <span class="important">бесплатный</span>, PvP и разрушения <strong>ЗАПРЕЩЕНЫ</strong> — полный мир.</li>
-                <li>Налог <span class="important">50%</span> с округлением <strong>в меньшую сторону</strong> (в твою пользу).</li>
-                <li>С каждого ресурса половина уходит в казну на общую стройку (маяк, порталы).</li>
-                <li>Безопасный фарм для новичков и мирных жителей.</li>
-                <li>Никто не сломает твои вещи, не украдёт руду.</li>
+                <li>Вход бесплатный, <span class="highlight">PvP и разрушения ЗАПРЕЩЕНЫ</span> — зона мира.</li>
+                <li><span class="highlight">Налог 50%</span> с округлением <strong>в меньшую сторону</strong> (в твою пользу).</li>
+                <li>Все добытые ресурсы делятся: половина в казну (на маяк/порталы), половина тебе.</li>
+                <li>Идеально для спокойного фарма, новичков и тех, кто не хочет рисковать.</li>
+                <li>Никто не украдёт твою руду, не сломает верстак.</li>
             </ul>
-            <div class="small-note" style="margin-top: 12px;"><i class="fas fa-hand-peace"></i> 50% налог, зато 100% безопасность.</div>
+            <div class="small" style="margin-top: 12px;"><i class="fas fa-hand-peace"></i> 50% налог, зато 100% безопасность.</div>
         </div>
     </div>
 
-    <!-- 4. МАЯК — НА НЕГО КОПИМ, А НЕ К НЕМУ ПРИНОСИМ (важное уточнение) -->
+    <!-- 4. Маяк — цель стройки (копим НА него) -->
     <div class="stone-card">
         <div class="card-title">
             <i class="fas fa-lightbulb"></i>
-            <span>Маяк — цель общей стройки</span>
+            <span>Маяк — великая цель</span>
         </div>
         <div class="beacon-goal">
-            <div>
-                <i class="fas fa-gem" style="font-size: 2rem; color: #f3bc5c;"></i>
-            </div>
+            <div><i class="fas fa-gem" style="font-size: 2.5rem; color: #c9aa6f;"></i></div>
             <div style="flex:1">
-                <p class="beacon-text"><strong class="important">ВНИМАНИЕ: НА МАЯК КОПИМ, А НЕ К НЕМУ КАЗНУ ПРИНОСИМ!</strong></p>
-                <p>Все налоги (15% и 50% из безопасной шахты) собираются в <strong>общую казну-сундук</strong>, которая находится у временного штаба. Эти ресурсы копятся <span class="important">ИМЕННО НА ПОСТРОЙКУ МАЯКА</span>. Маяк — это наша цель, ради которой мы собираем алмазы, обломки, камень и дерево.</p>
-                <p class="small-note">Когда маяк будет построен, он даст всем игрокам эффекты: <strong>Скорость II и Поспешность</strong> — чтобы быстрее бегать и добывать ресурсы. Но сначала нужно накопить на него!</p>
+                <p><strong class="highlight">ВНИМАНИЕ: НА МАЯК КОПИМ, А НЕ К НЕМУ КАЗНУ ПРИНОСИМ!</strong></p>
+                <p>Налоги собираются в <strong>общий сундук у Тронного зала</strong>. Когда накопится достаточно ресурсов (3 обсидиана, 5 стёкол, звезда Незера, 3 блока бекона) — <strong>строим маяк</strong> всем миром. Маяк даст эффекты: <span class="highlight">Скорость II и Поспешность II</span>, чтобы быстрее бегать и копать.</p>
             </div>
         </div>
-        <p><i class="fas fa-arrow-right"></i> <strong>Сбор на порталы и туннель:</strong> Часть налогов идёт также на <span class="important">большой туннель в Нижнем мире</span>. 1 шаг в аду = 4 шага в обычном мире. Туннель строим для дальних путешествий — это ускорит перемещение по острову в 4 раза.</p>
+        <p><i class="fas fa-arrow-right"></i> После маяка строим <strong>порталы и туннель в аду</strong> (1 шаг в аду = 4 шага в обычном мире). Туннель ускорит перемещение по острову в 4 раза.</p>
     </div>
 
-    <!-- 5. ПОРТАЛ В АД И ТУННЕЛЬ (1 шаг = 4) -->
+    <!-- 5. Портал и туннель (золотое правило) -->
     <div class="stone-card">
         <div class="card-title">
             <i class="fas fa-fire"></i>
-            <span>Портал в Нижний мир • Золотое правило</span>
+            <span>Портал в Нижний мир • Туннель</span>
         </div>
-        <div class="tax-highlight" style="background: #1a1510;">
-            <p><span class="big-percent" style="font-size: 2rem;">1 шаг в аду = 4 шага в обычном мире</span></p>
-            <p>Используй порталы, чтобы сокращать расстояния! Построим <strong class="important">грандиозный туннель в Нижнем мире</strong> — он соединит все важные точки острова. Каждый внесённый ресурс (обсидиан, камень, железо) приближает завершение туннеля.</p>
-            <p class="small-note"><i class="fas fa-tools"></i> Сбор на порталы уже входит в 15% налога, но можно сдавать и дополнительные ресурсы добровольно.</p>
+        <div class="tax-parchment">
+            <p><span class="big-percent" style="font-size: 1.8rem;">1 шаг в аду = 4 шага в обычном мире</span></p>
+            <p>Строим <strong class="highlight">большой туннель в Нижнем мире</strong> для дальних путешествий. Через портал можно сократить путь в 4 раза! Часть налогов (из 15%) уходит на строительство туннеля. Каждый может внести обсидиан, камень или железо добровольно.</p>
+            <p class="small"><i class="fas fa-tools"></i> Сбор на порталы и туннель идёт из общей казны — решает президент.</p>
         </div>
     </div>
 
-    <!-- 6. СВОД ПРАВИЛ КОРОТКО -->
+    <!-- 6. Президент и указы (ты — правитель) -->
     <div class="stone-card">
         <div class="card-title">
-            <i class="fas fa-gavel"></i>
-            <span>Коротко о главном</span>
+            <i class="fas fa-crown"></i>
+            <span>Президент Острова — Ты</span>
         </div>
-        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
+        <p><strong>Никаких президентов зданий для раздумий не нужно.</strong> Ты — единственный правитель. Все решения принимаешь ты, но с правом советоваться с народом.</p>
+        <div class="decree">
+            <i class="fas fa-feather-alt"></i> <strong>Указ Президента №1:</strong> «Утвердить единый налог 15% на все ресурсы. Утвердить опасную шахту (только группами от 3 человек, PvP разрешён) и безопасную шахту (налог 50%, округление вниз). Копим на маяк, портал и туннель. Закон Панополии обязателен для всех. Да будет так.»<br>
+            <span style="display: inline-block; margin-top: 8px;">— <strong>Президент Острова Эпштейна</strong></span>
+        </div>
+        <div class="decree">
+            <i class="fas fa-feather-alt"></i> <strong>Указ Президента №2:</strong> «Запрещено сражаться и вандалить в безопасной шахте. Нарушители караются штрафом 30% инвентаря или временным изгнанием. В опасной шахте — полная свобода, но вход только в группе от 3 игроков. Карта опасной шахты выдаётся каждому.»<br>
+            <span style="display: inline-block; margin-top: 8px;">— <strong>Президент</strong></span>
+        </div>
+        <p><i class="fas fa-gavel"></i> <strong>Твои полномочия:</strong> запуск строек, назначение ответственных, изменение налогов (в разумных пределах), суд над нарушителями, право вето. Раз в месяц — отчёт перед народом, но перевыборы только по твоему желанию.</p>
+    </div>
+
+    <!-- 7. Короткий свод правил -->
+    <div class="stone-card">
+        <div class="card-title">
+            <i class="fas fa-scroll"></i>
+            <span>Краткий каменный устав</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 1.2rem;">
             <div style="flex:1;">
-                <h3 style="color: #e0b062;"><i class="fas fa-percent"></i> Налоги</h3>
+                <h3><i class="fas fa-percent"></i> Налоги</h3>
                 <ul style="margin-left: 1.2rem;">
-                    <li>15% — единый ресурсный налог (алмазы/древесина/обломки/камень).</li>
-                    <li>50% — налог в безопасной шахте с округлением в меньшую сторону.</li>
-                    <li>Опасная шахта — 0% налог, только группа 3+.</li>
+                    <li>15% — общий налог (алмазы/древесина/обломки/камень).</li>
+                    <li>50% — в безопасной шахте.</li>
+                    <li>0% — в опасной шахте (но группа 3+).</li>
                 </ul>
             </div>
             <div style="flex:1;">
-                <h3 style="color: #e0b062;"><i class="fas fa-helmet-battle"></i> Панополия</h3>
+                <h3><i class="fas fa-helmet-battle"></i> Панополия</h3>
                 <ul style="margin-left: 1.2rem;">
-                    <li>Каждый выбирает профессию (шахтёр, дровосек, камнелом и тд).</li>
+                    <li>Обязательная профессия.</li>
                     <li>Без профессии — налог 25%.</li>
                 </ul>
             </div>
             <div style="flex:1;">
-                <h3 style="color: #e0b062;"><i class="fas fa-map"></i> Опасная шахта</h3>
+                <h3><i class="fas fa-map"></i> Шахты</h3>
                 <ul style="margin-left: 1.2rem;">
-                    <li>3+ игрока.</li>
-                    <li>Можно драться, ломать вещи, воровать.</li>
-                    <li>Карта выдается каждому.</li>
+                    <li>Опасная: 3+ игрока, PvP, вандализм, без налога.</li>
+                    <li>Безопасная: мир, налог 50%, округление вниз.</li>
                 </ul>
             </div>
         </div>
         <hr>
-        <p><i class="fas fa-landmark"></i> <strong>Итог:</strong> Копим на маяк сообща. Налоги сдаём в общий сундук (без плагинов, на честность). Опасная шахта — для смелых и жадных, безопасная — для мирного фарма. В аду 1 блок = 4 блока в обычном мире, строим туннель для скорости. Выбирай профессию, уважай закон и строй великий остров Эпштейна!</p>
+        <p><i class="fas fa-dharmachakra"></i> <strong>Главная цель:</strong> копим на маяк, портал и туннель в аду. 1 шаг в аду = 4 шага в обычном мире. Президент — ты. Ванильный сервер, всё на честном слове и уважении к законам острова.</p>
     </div>
 
-    <!-- Футер -->
     <div class="footer">
-        <i class="fas fa-mountain"></i> Остров Эпштейна • Каменный век • Ванильный сервер Майнкрафт<br>
-        Налоги на общую стройку: маяк, порталы, туннель. Опасная шахта: вход от 3 игроков, полный PvP. <br>
-        1 шаг в аду = 4 шага в обычном мире.
+        <i class="fas fa-mountain"></i> Остров Эпштейна • Белый камень • Древний свиток<br>
+        Налоги на общую стройку. Опасная шахта: вход только от 3 игроков. <br>
+        На маяк копим, а не к нему казну приносим. 1 шаг в аду = 4 шага в обычном мире.
     </div>
 </div>
 </body>
