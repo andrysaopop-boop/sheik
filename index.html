@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Остров Эпштейна | Президент Никита | CurseForge стиль</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Cinzel:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Create: Vector 1.20.1</title>
     <style>
         * {
             margin: 0;
@@ -14,375 +12,621 @@
         }
 
         body {
-            background: #0B0B10;
-            font-family: 'Inter', sans-serif;
-            color: #E8E6F0;
+            background-color: #030014;
+            color: #fff;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.5;
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* CurseForge inspired background with liquid glass overlay */
-        .bg-gradient {
+        /* Canvas для летающих частиц */
+        #particles-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at 30% 20%, #1A1A2E 0%, #05050A 100%);
-            z-index: -2;
-        }
-
-        .bg-gradient::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(45deg, rgba(100, 80, 160, 0.03) 0px, rgba(100, 80, 160, 0.03) 2px, transparent 2px, transparent 12px);
             pointer-events: none;
+            z-index: 0;
         }
 
-        .bg-gradient::after {
-            content: '';
-            position: absolute;
-            top: -20%;
-            left: -20%;
-            width: 140%;
-            height: 140%;
-            background: radial-gradient(circle at 60% 40%, rgba(210, 180, 110, 0.08) 0%, rgba(0,0,0,0) 70%);
-            animation: liquidGlass 14s infinite alternate ease-in-out;
-            pointer-events: none;
-        }
-
-        @keyframes liquidGlass {
-            0% { opacity: 0.4; transform: translate(-2%, -2%) scale(1);}
-            100% { opacity: 1; transform: translate(2%, 2%) scale(1.05);}
-        }
-
+        /* Контейнеры */
         .container {
-            max-width: 1280px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem 1.5rem;
+            padding: 0 24px;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
-        /* ===== CurseForge Style Components ===== */
-        .hero {
-            text-align: center;
-            margin: 2rem 0 3rem;
+        /* Хедер */
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            background: rgba(3, 0, 20, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-
-        .hero h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #F5E6C8 0%, #D9B48B 40%, #C49A6C 70%, #E8CFA0 100%);
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #e59cff, #ba9cff, #9cb2ff);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
             background-clip: text;
             -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.02em;
-            font-family: 'Cinzel', serif;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            -webkit-text-fill-color: transparent;
+        }
+        .badge {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 14px;
+            color: #ba9cff;
         }
 
-        .president-badge {
+        /* Hero секция */
+        .hero {
+            padding: 80px 0 48px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 14px;
+            margin-bottom: 24px;
+            color: #ba9cff;
+            transition: all 0.3s ease;
+        }
+        .hero-badge:hover {
+            border-color: #ba9cff;
+            transform: translateY(-2px);
+        }
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 600;
+            background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Серверная карточка */
+        .server-card {
+            background: linear-gradient(135deg, rgba(186,156,255,0.08) 0%, rgba(3,0,20,0.4) 100%);
+            border: 1px solid rgba(186,156,255,0.2);
+            border-radius: 24px;
+            padding: 20px 32px;
+            margin: 32px auto 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            backdrop-filter: blur(8px);
+        }
+        .server-label {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+        }
+        .server-ip {
+            font-size: 24px;
+            font-weight: 600;
+            font-family: monospace;
+            color: #ba9cff;
+        }
+        .copy-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .copy-btn:hover {
+            background: rgba(186,156,255,0.2);
+            border-color: #ba9cff;
+        }
+
+        /* Секции */
+        .section {
+            padding: 64px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .section-desc {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        /* Карточки модов */
+        .mods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+        }
+        .mod-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        .mod-card:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(186,156,255,0.3);
+            transform: translateY(-4px);
+        }
+        .mod-name {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .mod-size {
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+            font-weight: normal;
+        }
+        .mod-desc {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 8px;
+        }
+        .mod-type {
+            display: inline-block;
+            font-size: 10px;
+            padding: 4px 10px;
+            background: rgba(186,156,255,0.12);
+            border-radius: 100px;
+            color: #ba9cff;
+            margin-top: 12px;
+        }
+
+        /* Инструкция */
+        .steps {
+            background: rgba(255,255,255,0.02);
+            border-radius: 24px;
+            padding: 32px;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .step-num {
+            width: 36px;
+            height: 36px;
+            background: rgba(186,156,255,0.12);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #ba9cff;
+            flex-shrink: 0;
+        }
+        .step-content h4 {
+            font-size: 18px;
+            margin-bottom: 6px;
+        }
+        .step-content p {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+        code {
+            background: rgba(255,255,255,0.06);
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #ba9cff;
+        }
+
+        /* Кнопки скачивания */
+        .download-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 32px 0 16px;
+        }
+        .btn {
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            background: rgba(20, 18, 30, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 100px;
-            padding: 0.6rem 2rem;
-            margin-top: 1.2rem;
-            border: 1px solid rgba(210, 180, 110, 0.5);
-            font-weight: 700;
-            font-size: 1.2rem;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 500;
+            font-size: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: linear-gradient(180deg, rgba(113,47,255,0.12) 0%, rgba(60,8,126,0.32) 100%);
+            border: 1px solid rgba(207,184,255,0.32);
+            color: #f4f0ff;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(180deg, rgba(113,47,255,0.24) 0%, rgba(60,8,126,0.42) 100%);
+            border-color: rgba(207,184,255,0.6);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f4f0ff;
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.06);
+            transform: translateY(-2px);
+        }
+        .btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
         }
 
-        .stats-grid {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin: 2.5rem 0;
+        /* Ресурспаки и шейдеры */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
         }
-
-        .stat-card {
-            background: rgba(15, 15, 22, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
-            padding: 1.2rem 2rem;
-            text-align: center;
-            border: 1px solid rgba(210, 180, 110, 0.3);
-            min-width: 140px;
-            transition: 0.2s;
+        .resource-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
         }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #E8C87A;
-            line-height: 1;
+        .resource-card:hover {
+            background: rgba(255,255,255,0.04);
+            border-color: rgba(186,156,255,0.3);
+            transform: translateY(-4px);
         }
-
-        /* Glass Cards — CurseForge style panels */
-        .glass-panel {
-            background: rgba(12, 12, 18, 0.65);
-            backdrop-filter: blur(14px);
-            border-radius: 28px;
-            border: 1px solid rgba(210, 180, 110, 0.25);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-
-        .glass-panel:hover {
-            border-color: rgba(220, 190, 120, 0.6);
-            background: rgba(18, 18, 26, 0.75);
-        }
-
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            font-weight: 700;
-            font-family: 'Cinzel', serif;
-            border-left: 5px solid #E8C87A;
-            padding-left: 1rem;
-        }
-
-        .tax-highlight {
-            background: linear-gradient(95deg, rgba(30, 25, 45, 0.8) 0%, rgba(20, 18, 30, 0.9) 100%);
-            border-radius: 24px;
-            padding: 1.2rem 1.8rem;
-            margin: 1rem 0;
-            border-left: 4px solid #E8C87A;
-        }
-
-        .badge-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 1rem 0;
-        }
-        .badge {
-            background: rgba(30, 28, 40, 0.8);
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
+        .resource-name {
+            font-size: 16px;
             font-weight: 600;
-            font-size: 0.85rem;
-            border: 1px solid #B99E6B;
+            margin-bottom: 8px;
         }
 
-        /* Two column mines */
-        .mines-row {
-            display: flex;
-            gap: 1.8rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-        }
-        .mine-col {
-            flex: 1;
-            background: rgba(10, 10, 16, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 28px;
-            padding: 1.8rem;
-            border-top: 6px solid;
-            transition: 0.2s;
-        }
-        .mine-col.danger { border-top-color: #E85D3A; }
-        .mine-col.safe { border-top-color: #5FB85C; }
-        .mine-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feature-list {
-            list-style: none;
-            padding: 0;
-        }
-        .feature-list li {
-            margin-bottom: 0.7rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .feature-list li i {
-            width: 24px;
-            color: #E8C87A;
-        }
-
-        .decree-block {
-            background: rgba(0,0,0,0.45);
-            border-left: 5px solid #E8C87A;
-            padding: 1rem 1.5rem;
-            margin: 1rem 0;
-            border-radius: 20px;
-            font-style: normal;
-        }
-
-        .btn-ghost {
-            display: inline-block;
-            background: rgba(210, 180, 110, 0.15);
-            border: 1px solid #C9AA6E;
-            border-radius: 40px;
-            padding: 0.3rem 1rem;
-            font-size: 0.8rem;
-        }
-
-        footer {
+        /* Футер */
+        .footer {
+            padding: 48px 0;
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(210, 180, 110, 0.3);
-            font-size: 0.8rem;
-            color: #A89F7A;
+            color: rgba(255,255,255,0.35);
+            font-size: 13px;
         }
 
-        @media (max-width: 800px) {
-            .container { padding: 1rem; }
-            .hero h1 { font-size: 2.5rem; }
-            .glass-panel { padding: 1.2rem; }
-            .section-header { font-size: 1.4rem; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .section-title { font-size: 28px; }
+            .mods-grid { grid-template-columns: 1fr; }
+            .server-ip { font-size: 18px; }
+            .steps { padding: 20px; }
         }
-        .highlight { color: #F2D48D; font-weight: 700; }
-        hr { margin: 1rem 0; border: 0; height: 1px; background: linear-gradient(90deg, transparent, #C9AA6E, transparent); }
     </style>
 </head>
 <body>
-<div class="bg-gradient"></div>
-<div class="container">
-    <!-- Hero section CurseForge style -->
-    <div class="hero">
-        <h1><i class="fas fa-dragon"></i> ОСТРОВ ЭПШТЕЙНА</h1>
-        <div class="president-badge">
-            <i class="fas fa-crown"></i> ПРЕЗИДЕНТ НИКИТА <i class="fas fa-gavel"></i>
-        </div>
-        <div class="stats-grid">
-            <div class="stat-card"><div class="stat-number">15%</div><div>единый налог</div></div>
-            <div class="stat-card"><div class="stat-number">0%</div><div>опасная шахта</div></div>
-            <div class="stat-card"><div class="stat-number">50%</div><div>безопасная шахта</div></div>
-            <div class="stat-card"><div class="stat-number">4x</div><div>скорость в аду</div></div>
-        </div>
-    </div>
 
-    <!-- Налоговая система — как главный модуль -->
-    <div class="glass-panel">
-        <div class="section-header"><i class="fas fa-coins"></i> Единый ресурсный налог — 15%</div>
-        <div class="tax-highlight">
-            <span style="font-size: 2rem; font-weight:800;">⚡ 15% налог ⚡</span>
-            <p style="margin-top: 8px;">с <span class="highlight">алмазов, древесины, незерита, камня</span> и всех ценных ресурсов.</p>
-            <p><i class="fas fa-archive"></i> <strong>Куда идут налоги?</strong> Общая казна (сундук у Тронного зала). Копим <span class="highlight">НА МАЯК, ПОРТАЛЫ И ТУННЕЛЬ</span>. <strong class="highlight">На маяк копим, а не к нему казну приносим!</strong></p>
-            <p class="btn-ghost" style="margin-top: 8px;"><i class="fas fa-calculator"></i> Округление налога всегда в меньшую сторону (9 алмазов → отдаёшь 1 алмаз)</p>
-        </div>
-        <p><i class="fas fa-landmark"></i> Без плагинов — честь и совесть. Каждый сдаёт ресурсы лично.</p>
-    </div>
+<canvas id="particles-canvas"></canvas>
 
-    <!-- Закон Панополии (профессии) -->
-    <div class="glass-panel">
-        <div class="section-header"><i class="fas fa-users"></i> Закон Панополии — выбери стезю</div>
-        <p><strong>Каждый игрок обязан избрать профессию.</strong> Без профессии — налог 25% до момента выбора.</p>
-        <div class="badge-list">
-            <span class="badge"><i class="fas fa-pickaxe"></i> Шахтёр</span>
-            <span class="badge"><i class="fas fa-tree"></i> Дровосек</span>
-            <span class="badge"><i class="fas fa-gem"></i> Искатель обломков</span>
-            <span class="badge"><i class="fas fa-mountain"></i> Камнелом</span>
-            <span class="badge"><i class="fas fa-hard-hat"></i> Строитель казны</span>
-            <span class="badge"><i class="fas fa-route"></i> Проводник туннелей</span>
-            <span class="badge"><i class="fas fa-shield-alt"></i> Хранитель маяка</span>
-        </div>
-        <p><span class="highlight">Менять профессию</span> — раз в 7 дней по указу президента Никиты.</p>
-    </div>
-
-    <!-- Шахты: опасная / безопасная (CurseForge два столбца) -->
-    <div class="mines-row">
-        <div class="mine-col danger">
-            <div class="mine-title"><i class="fas fa-skull"></i> ОПАСНАЯ ШАХТА</div>
-            <ul class="feature-list">
-                <li><i class="fas fa-percent"></i> Налог 0% — вся добыча твоя</li>
-                <li><i class="fas fa-users"></i> Вход только когда 3+ игрока</li>
-                <li><i class="fas fa-fist-raised"></i> Можно сражаться, воровать, вандалить</li>
-                <li><i class="fas fa-map"></i> Карта шахты выдаётся каждому при входе</li>
-            </ul>
-            <div class="btn-ghost"><i class="fas fa-dragon"></i> Риск максимальный, добыча без налогов — группой от 3</div>
-        </div>
-        <div class="mine-col safe">
-            <div class="mine-title"><i class="fas fa-shield-alt"></i> БЕЗОПАСНАЯ ШАХТА</div>
-            <ul class="feature-list">
-                <li><i class="fas fa-hand-peace"></i> PvP и разрушения ЗАПРЕЩЕНЫ</li>
-                <li><i class="fas fa-percent"></i> Налог 50% с округлением вниз (в твою пользу)</li>
-                <li><i class="fas fa-box"></i> Половина ресурсов в казну, половина тебе</li>
-                <li><i class="fas fa-seedling"></i> Идеально для спокойного фарма</li>
-            </ul>
-            <div class="btn-ghost"><i class="fas fa-hand-peace"></i> 50% налог, зато 100% безопасность</div>
-        </div>
-    </div>
-
-    <!-- Маяк — великая цель -->
-    <div class="glass-panel">
-        <div class="section-header"><i class="fas fa-lightbulb"></i> Маяк — сияние острова</div>
-        <div class="tax-highlight" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
-            <i class="fas fa-gem" style="font-size: 3rem; color: #E8C87A;"></i>
-            <div><strong class="highlight">ВНИМАНИЕ: НА МАЯК КОПИМ, А НЕ К НЕМУ КАЗНУ ПРИНОСИМ!</strong><br>
-            Налоги в общий сундук. Когда накопится: 3 обсидиана, 5 стёкол, звезда Незера, 3 блока бекона — строим маяк. Эффекты: <span class="highlight">Скорость II и Поспешность II</span>.</div>
-        </div>
-        <p><i class="fas fa-arrow-right"></i> После маяка строим порталы и туннель в аду. <strong>1 шаг в аду = 4 шага в обычном мире</strong>. Туннель ускорит перемещение в 4 раза.</p>
-    </div>
-
-    <!-- Портал и туннель -->
-    <div class="glass-panel">
-        <div class="section-header"><i class="fas fa-fire"></i> Портал в Нижний мир • Туннель</div>
-        <div class="tax-highlight">
-            <span style="font-size: 1.6rem; font-weight: 800;">🌀 1 шаг в аду = 4 шага в обычном мире 🌀</span>
-            <p>Строим большой туннель в Нижнем мире для дальних путешествий. Часть налогов (из 15%) уходит на строительство туннеля. Каждый может внести обсидиан, камень или железо добровольно.</p>
-        </div>
-    </div>
-
-    <!-- Указы Президента Никиты -->
-    <div class="glass-panel">
-        <div class="section-header"><i class="fas fa-crown"></i> Президент Острова — Никита</div>
-        <p><strong>Никаких президентов зданий для раздумий не нужно.</strong> Никита — единственный правитель.</p>
-        <div class="decree-block">
-            <i class="fas fa-scroll"></i> <strong>Указ №1:</strong> «Утвердить единый налог 15%. Опасная шахта — только группами от 3 человек, PvP разрешён. Безопасная шахта — налог 50%, округление вниз. Копим на маяк, портал и туннель. Закон Панополии обязателен.»<br>
-            <span style="display: block; margin-top: 8px;">— <strong>Президент Никита</strong></span>
-        </div>
-        <div class="decree-block">
-            <i class="fas fa-scroll"></i> <strong>Указ №2:</strong> «Запрещено сражаться и вандалить в безопасной шахте. Нарушители — штраф 30% инвентаря или изгнание. В опасной шахте — полная свобода, но вход только группой от 3 игроков.»<br>
-            <span>— <strong>Президент Никита</strong></span>
-        </div>
-        <p><i class="fas fa-gavel"></i> <strong>Полномочия Никиты:</strong> запуск строек, назначение ответственных, изменение налогов, суд над нарушителями, право вето.</p>
-    </div>
-
-    <!-- Краткий устав -->
-    <div class="glass-panel">
-        <div class="section-header"><i class="fas fa-scroll"></i> Каменный устав (коротко)</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
-            <div><h3><i class="fas fa-percent"></i> Налоги</h3>
-                <ul class="feature-list"><li>15% — общий налог</li><li>50% — безопасная шахта</li><li>0% — опасная шахта (3+ игрока)</li></ul>
+<header class="header">
+    <div class="container">
+        <div class="header-inner">
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3L3 8L12 13L21 8L12 3Z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M3 16L12 21L21 16" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M3 12L12 17L21 12" stroke="white" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <div class="logo-text">Create: Vector</div>
             </div>
-            <div><h3><i class="fas fa-helmet-battle"></i> Панополия</h3>
-                <ul class="feature-list"><li>Обязательная профессия</li><li>Без профессии — налог 25%</li></ul>
+            <div class="badge">Minecraft 1.20.1 | Forge</div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-badge">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L15 8.5L22 9.5L17 14L18.5 21L12 17.5L5.5 21L7 14L2 9.5L9 8.5L12 2Z"/>
+                </svg>
+                Готовая сборка для Prism Launcher
             </div>
-            <div><h3><i class="fas fa-map"></i> Шахты</h3>
-                <ul class="feature-list"><li>Опасная: PvP, 0% налог</li><li>Безопасная: мир, 50% налог</li></ul>
+            <h1>Minecraft Modpack<br>Create: Vector</h1>
+            <p>Оптимизированная сборка с 30+ модами — технологии, графика, звук и удобство</p>
+            
+            <!-- Карточка сервера -->
+            <div class="server-card">
+                <span class="server-label">🎮 ИГРОВОЙ СЕРВЕР</span>
+                <span class="server-ip" id="server-ip">213.152.43.84:25633</span>
+                <button class="copy-btn" onclick="copyServerIP()">📋 Копировать</button>
+            </div>
+
+            <!-- Кнопки скачивания -->
+            <div class="download-buttons">
+                <a href="https://disk.yandex.ru/d/_g5eaPgakEJ2EQ" class="btn btn-primary" id="yandexLink">
+                    <svg viewBox="0 0 24 24"><path d="M4 16L4 4L12 8L20 4L20 16L12 20L4 16Z" stroke="currentColor" fill="none"/><path d="M12 20L12 8" stroke="currentColor"/></svg>
+                    Скачать с Яндекс Диска
+                </a>
+                <a href="#" class="btn btn-secondary" id="googleLink">
+                    <svg viewBox="0 0 24 24"><path d="M4 16L4 4L12 8L20 4L20 16L12 20L4 16Z" stroke="currentColor" fill="none"/><path d="M12 20L12 8" stroke="currentColor"/></svg>
+                    Скачать с Google Drive
+                </a>
+            </div>
+            <p style="color: rgba(255,255,255,0.35); font-size: 13px; margin-top: 8px;">📦 Архив .zip — готов к импорту в Prism Launcher</p>
+        </div>
+
+        <!-- Инструкция по установке -->
+        <div class="section">
+            <h2 class="section-title">📦 Установка в Prism Launcher</h2>
+            <p class="section-desc">Два способа добавить сборку — выбери удобный</p>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h4>Скачай архив .zip</h4>
+                        <p>Нажми на одну из кнопок выше и скачай архив с модами и конфигами</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h4>Способ 1 — Импорт (простой)</h4>
+                        <p>В Prism Launcher нажми <code>Файл → Импорт из ZIP</code> и выбери скачанный архив</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h4>Способ 2 — Ручной (если импорт не работает)</h4>
+                        <p>Распакуй архив и скопируй папку с инстансом в <code>Prism Launcher/instances/</code>. Затем перезапусти лаунчер</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h4>Запускай и играй!</h4>
+                        <p>Выбери инстанс и нажми <code>Запустить</code>. Для подключения к серверу используй IP: <code>213.152.43.84:25633</code></p>
+                    </div>
+                </div>
             </div>
         </div>
-        <hr>
-        <p><i class="fas fa-dharmachakra"></i> <strong>Главная цель:</strong> копим на маяк, портал и туннель в аду. 1 шаг в аду = 4 шага в обычном мире. Президент — <strong>Никита</strong>. Ванильный сервер, всё на честном слове и жидком стекле.</p>
-    </div>
 
-    <footer>
-        <i class="fas fa-mountain"></i> Остров Эпштейна • Чёрное стекло • Президент Никита<br>
-        Налоги на общую стройку. Опасная шахта: вход только от 3 игроков. <br>
-        На маяк копим, а не к нему казну приносим. 1 шаг в аду = 4 шага в обычном мире.
-    </footer>
-</div>
+        <!-- Список модов -->
+        <div class="section">
+            <h2 class="section-title">🔧 Моды в сборке</h2>
+            <p class="section-desc">30+ модов — технологии, графика, звук, кулинария и оптимизация</p>
+            <div class="mods-grid">
+                <!-- Ряд 1 -->
+                <div class="mod-card"><div class="mod-name">AI Improvements <span class="mod-size">~28 КБ</span></div><div class="mod-desc">Улучшает ИИ мобов — они умнее, но без нагрузки на процессор</div><span class="mod-type">Оптимизация / ИИ</span></div>
+                <div class="mod-card"><div class="mod-name">Ambient Sounds <span class="mod-size">~—</span></div><div class="mod-desc">Атмосферные звуки — ветер, птицы, ручьи в разных биомах</div><span class="mod-type">Звук / Атмосфера</span></div>
+                <div class="mod-card"><div class="mod-name">Architectury API <span class="mod-size">~—</span></div><div class="mod-desc">Библиотека для совместимости модов на Forge и Fabric</div><span class="mod-type">Библиотека</span></div>
+                <div class="mod-card"><div class="mod-name">Atmosfera <span class="mod-size">~—</span></div><div class="mod-desc">Динамическая музыка и звуки окружения под биомы</div><span class="mod-type">Звук / Атмосфера</span></div>
+                <div class="mod-card"><div class="mod-name">Better Biome Blend <span class="mod-size">~—</span></div><div class="mod-desc">Плавные переходы цветов между биомами</div><span class="mod-type">Графика</span></div>
+                <div class="mod-card"><div class="mod-name">Cloth Config <span class="mod-size">~—</span></div><div class="mod-desc">Библиотека для настройки модов</div><span class="mod-type">Библиотека</span></div>
+                <div class="mod-card"><div class="mod-name">Create <span class="mod-size">~18.3 МБ</span></div><div class="mod-desc">Главный технологический мод — механизмы, поезда, автоматизация</div><span class="mod-type">Технологии</span></div>
+                <div class="mod-card"><div class="mod-name">Create Big Cannons <span class="mod-size">~3.9 МБ</span></div><div class="mod-desc">Огромные пушки для Create — стреляй ядрами</div><span class="mod-type">Технологии / Оружие</span></div>
+                <div class="mod-card"><div class="mod-name">CreativeCore <span class="mod-size">~1.1 МБ</span></div><div class="mod-desc">Библиотека для текстур и анимаций</div><span class="mod-type">Библиотека</span></div>
+                <div class="mod-card"><div class="mod-name">Effectual <span class="mod-size">~—</span></div><div class="mod-desc">Красивые частицы и визуальные эффекты</div><span class="mod-type">Графика / Эффекты</span></div>
+                <div class="mod-card"><div class="mod-name">Embeddium <span class="mod-size">~—</span></div><div class="mod-desc">Форк Rubidium — оптимизация рендера для слабых ПК</div><span class="mod-type">Оптимизация</span></div>
+                <div class="mod-card"><div class="mod-name">Falling Leaves <span class="mod-size">~—</span></div><div class="mod-desc">Опадающая листва с деревьев</div><span class="mod-type">Графика / Атмосфера</span></div>
+                <div class="mod-card"><div class="mod-name">Farmer's Delight <span class="mod-size">~2.8 МБ</span></div><div class="mod-desc">Кулинария — новые блюда, фермерство, ножи</div><span class="mod-type">Кулинария</span></div>
+                <div class="mod-card"><div class="mod-name">Fzzy Config <span class="mod-size">~—</span></div><div class="mod-desc">Библиотека конфигураций</div><span class="mod-type">Библиотека</span></div>
+                <div class="mod-card"><div class="mod-name">GlitchCore <span class="mod-size">~85 КБ</span></div><div class="mod-desc">Библиотека для совместимости модов</div><span class="mod-type">Библиотека</span></div>
+                <div class="mod-card"><div class="mod-name">JEI (Just Enough Items) <span class="mod-size">~—</span></div><div class="mod-desc">Показывает все рецепты крафта</div><span class="mod-type">Удобство</span></div>
+                <div class="mod-card"><div class="mod-name">JourneyMap <span class="mod-size">~6.8 МБ</span></div><div class="mod-desc">Мини-карта и полная карта мира с метками</div><span class="mod-type">Карта / Навигация</span></div>
+                <div class="mod-card"><div class="mod-name">Kiwi <span class="mod-size">~711 КБ</span></div><div class="mod-desc">Библиотека для модов</div><span class="mod-type">Библиотека</span></div>
+                <div class="mod-card"><div class="mod-name">Kotlin for Forge <span class="mod-size">~—</span></div><div class="mod-desc">Библиотека Kotlin для модов</div><span class="mod-type">Библиотека</span></div>
+                <div class="mod-card"><div class="mod-name">Lithostitched <span class="mod-size">~465 КБ</span></div><div class="mod-desc">Улучшает генерацию структур</div><span class="mod-type">Генерация мира</span></div>
+                <div class="mod-card"><div class="mod-name">Not Enough Animations <span class="mod-size">~—</span></div><div class="mod-desc">Добавляет анимации предметам в руках</div><span class="mod-type">Анимация</span></div>
+                <div class="mod-card"><div class="mod-name">ObsidianUI <span class="mod-size">~—</span></div><div class="mod-desc">Тёмный стильный интерфейс</div><span class="mod-type">UI / Оформление</span></div>
+                <div class="mod-card"><div class="mod-name">Oculus <span class="mod-size">~—</span></div><div class="mod-desc">Форк Iris — шейдеры на Forge</div><span class="mod-type">Графика / Шейдеры</span></div>
+                <div class="mod-card"><div class="mod-name">Passable Foliage <span class="mod-size">~—</span></div><div class="mod-desc">Можно проходить сквозь листву кустов</div><span class="mod-type">Удобство</span></div>
+                <div class="mod-card"><div class="mod-name">Presence Footsteps <span class="mod-size">~—</span></div><div class="mod-desc">Реалистичные звуки шагов по разным блокам</div><span class="mod-type">Звук</span></div>
+                <div class="mod-card"><div class="mod-name">Ritchie's Projectile Lib <span class="mod-size">~77 КБ</span></div><div class="mod-desc">Улучшает физику снарядов</div><span class="mod-type">Физика</span></div>
+                <div class="mod-card"><div class="mod-name">Ryoamic Lights <span class="mod-size">~—</span></div><div class="mod-desc">Динамическое освещение от предметов в руке</div><span class="mod-type">Графика / Освещение</span></div>
+                <div class="mod-card"><div class="mod-name">Serene Seasons <span class="mod-size">~157 КБ</span></div><div class="mod-desc">Времена года — зима, лето, листопады</div><span class="mod-type">Окружение</span></div>
+                <div class="mod-card"><div class="mod-name">Sound Physics Remastered <span class="mod-size">~—</span></div><div class="mod-desc">Реалистичная физика звука — эхо, приглушение</div><span class="mod-type">Звук</span></div>
+                <div class="mod-card"><div class="mod-name">Tectonic <span class="mod-size">~315 КБ</span></div><div class="mod-desc">Реалистичная генерация мира — горы и океаны</div><span class="mod-type">Генерация мира</span></div>
+                <div class="mod-card"><div class="mod-name">TLib <span class="mod-size">~—</span></div><div class="mod-desc">Библиотека для модов</div><span class="mod-type">Библиотека</span></div>
+                <div class="mod-card"><div class="mod-name">TreeChop <span class="mod-size">~505 КБ</span></div><div class="mod-desc">Руби дерево целиком — падает целиком</div><span class="mod-type">Удобство</span></div>
+                <div class="mod-card"><div class="mod-name">YetAnotherConfigLib <span class="mod-size">~—</span></div><div class="mod-desc">Удобное меню настроек модов</div><span class="mod-type">Библиотека / UI</span></div>
+            </div>
+        </div>
+
+        <!-- Ресурспаки и шейдеры -->
+        <div class="section">
+            <h2 class="section-title">🎨 Графика — Ресурспаки и шейдеры</h2>
+            <p class="section-desc">Всё это можно скачать отдельно — они не нагружают ПК</p>
+            
+            <h3 style="font-size: 20px; margin: 24px 0 16px;">✨ Шейдеры (лёгкие)</h3>
+            <div class="resource-grid">
+                <div class="resource-card"><div class="resource-name">Sildur's Vibrant Shaders — Lite</div><div class="mod-desc">Красивые тени и вода. Lite версия — 30-60 FPS даже на встройке</div></div>
+                <div class="resource-card"><div class="resource-name">Complementary Shaders — Reimagined</div><div class="mod-desc">Очень красивый шейдер с режимом "Potato" для слабых ПК</div></div>
+                <div class="resource-card"><div class="resource-name">MakeUp — Ultra Fast</div><div class="mod-desc">Сверхлёгкий шейдер — 60+ FPS на любом ПК</div></div>
+            </div>
+
+            <h3 style="font-size: 20px; margin: 32px 0 16px;">🖼️ Ресурспаки</h3>
+            <div class="resource-grid">
+                <div class="resource-card"><div class="resource-name">Faithful 64x / 32x</div><div class="mod-desc">Ванильный стиль в высоком разрешении. 32x — для слабых ПК</div></div>
+                <div class="resource-card"><div class="resource-name">Stay True</div><div class="mod-desc">Насыщенные цвета, пышная листва — почти без потери FPS</div></div>
+                <div class="resource-card"><div class="resource-name">Fresh Animations</div><div class="mod-desc">Анимированные мобы — моргают, двигают ушами</div></div>
+                <div class="resource-card"><div class="resource-name">Dramatic Skys</div><div class="mod-desc">Реалистичные облака, закаты и звёздное небо</div></div>
+                <div class="resource-card"><div class="resource-name">Better Leaves</div><div class="mod-desc">Объёмная и пышная листва</div></div>
+                <div class="resource-card"><div class="resource-name">Vanilla Normals Renewed</div><div class="mod-desc">3D-текстуры блоков — объёмные кирпичи и доски</div></div>
+            </div>
+        </div>
+
+        <!-- Системные требования -->
+        <div class="section">
+            <h2 class="section-title">💻 Системные требования</h2>
+            <div class="steps" style="background: transparent; padding: 0;">
+                <div class="step">
+                    <div class="step-num">⚡</div>
+                    <div class="step-content"><h4>Минимальные</h4><p>Intel Core i3 / 8 ГБ ОЗУ / Intel HD Graphics / Windows 10 / 4 ГБ RAM для Minecraft</p></div>
+                </div>
+                <div class="step">
+                    <div class="step-num">🚀</div>
+                    <div class="step-content"><h4>Рекомендуемые</h4><p>Intel Core i5 / 16 ГБ ОЗУ / GTX 1050 / Windows 10-11 / 6-8 ГБ RAM для Minecraft</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>Create: Vector — сборка для Minecraft 1.20.1 Forge</p>
+        <p style="margin-top: 8px;">📌 Ссылки на Яндекс Диск и Google Drive добавь после загрузки архива с модами</p>
+    </div>
+</footer>
+
+<script>
+    // Летающие частицы
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId = null;
+    let mouseX = 0, mouseY = 0;
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.3;
+            this.speedY = (Math.random() - 0.5) * 0.2;
+            this.opacity = Math.random() * 0.3 + 0.1;
+        }
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.x > canvas.width) this.x = 0;
+            if (this.y < 0) this.y = canvas.height;
+            if (this.y > canvas.height) this.y = 0;
+            const dx = mouseX - this.x;
+            const dy = mouseY - this.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+                const angle = Math.atan2(dy, dx);
+                const force = (100 - dist) / 500;
+                this.x -= Math.cos(angle) * force;
+                this.y -= Math.sin(angle) * force;
+            }
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(186, 156, 255, ${this.opacity})`;
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        particles = [];
+        const count = Math.min(150, Math.floor(window.innerWidth * window.innerHeight / 8000));
+        for (let i = 0; i < count; i++) particles.push(new Particle());
+    }
+
+    function animateParticles() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => { p.update(); p.draw(); });
+        animationId = requestAnimationFrame(animateParticles);
+    }
+
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        initParticles();
+    });
+    window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    resizeCanvas();
+    initParticles();
+    animateParticles();
+
+    // Копирование IP
+    function copyServerIP() {
+        const ip = document.getElementById('server-ip').innerText;
+        navigator.clipboard.writeText(ip);
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = '✅ Скопировано!';
+        setTimeout(() => btn.innerText = originalText, 2000);
+    }
+
+    // Пустые ссылки — вставь свои
+    document.getElementById('yandexLink').href = 'https://disk.yandex.ru/d/_g5eaPgakEJ2EQ';  // Ссылка на Яндекс Диск
+    document.getElementById('googleLink').href = 'https://drive.google.com/drive/folders/1PPjV2YgShlHdwKVZw7-fDkSgUNXrdx2d?usp=sharing'; // Ссылка на Google Drive
+</script>
 </body>
 </html>
